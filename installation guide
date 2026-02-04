@@ -1,0 +1,145 @@
+# 🚀 Gangnam Beauty Website 설치 가이드
+
+## 📋 벨라를 위한 단계별 설치 방법
+
+> 이 가이드는 Windows 환경에서 프로젝트를 설정하는 방법을 설명합니다.
+> 本指南說明如何在 Windows 環境中設置專案。
+
+---
+
+## 📥 Step 1: ZIP 파일 다운로드 및 압축 해제
+
+1. **다운로드한 ZIP 파일**을 원하는 위치에 저장
+2. **압축 해제**하여 `gangnam-beauty-new` 폴더 생성
+3. **폴더 이름 변경** (선택): `gangnam-beauty-website`로 변경 권장
+
+```
+예시 경로:
+D:\AI_coding_project_all\gangnam-beauty-website\
+```
+
+---
+
+## 📥 Step 2: Node.js 설치 확인
+
+터미널(PowerShell 또는 CMD)에서:
+
+```bash
+node --version
+```
+
+**v18 이상**이 필요합니다. 없다면 [Node.js 공식 사이트](https://nodejs.org/)에서 설치.
+
+---
+
+## 📦 Step 3: 의존성 설치
+
+프로젝트 폴더에서 터미널 열고:
+
+```bash
+cd D:\AI_coding_project_all\gangnam-beauty-website
+npm install
+```
+
+약 1-2분 소요됩니다.
+
+---
+
+## 🏃 Step 4: 개발 서버 실행
+
+```bash
+npm run dev
+```
+
+성공하면 다음 메시지가 표시됩니다:
+```
+▲ Next.js 14.x.x
+- Local:        http://localhost:3000
+```
+
+브라우저에서 `http://localhost:3000` 열기!
+
+---
+
+## 🔧 문제 해결 / 常見問題
+
+### 오류: "Cannot find module..."
+
+```bash
+rm -rf node_modules
+npm install
+```
+
+### 포트 3000 사용 중
+
+```bash
+npm run dev -- -p 3001
+```
+
+### TypeScript 오류
+
+```bash
+npm install typescript @types/react @types/node --save-dev
+```
+
+---
+
+## 📝 수정하기 쉬운 파일들
+
+| 수정 목적 | 파일 위치 |
+|-----------|-----------|
+| 繁體中文 텍스트 | `src/locales/zh-TW.json` |
+| 简体中文 텍스트 | `src/locales/zh-CN.json` |
+| 한국어 텍스트 | `src/locales/ko.json` |
+| 색상/디자인 | `tailwind.config.js` |
+| WhatsApp 번호 | `src/app/page.tsx` (검색: `wa.me`) |
+| WeChat ID | `src/locales/*.json` → `contact.wechatId` |
+
+---
+
+## 🌐 배포하기 (Vercel)
+
+1. [GitHub](https://github.com)에 프로젝트 업로드
+2. [Vercel](https://vercel.com) 계정 생성
+3. "New Project" → GitHub 연결
+4. 자동 배포 완료!
+
+또는 Cursor에서 바로:
+```bash
+npx vercel
+```
+
+---
+
+## 📁 기존 프로젝트 정리
+
+기존 `D:\AI_coding_project_all\gangnam-beauty-website` 폴더에 있던 파일들:
+
+### ❌ 삭제해도 되는 파일:
+- `gangnam-beauty-website.jsx` (인코딩 깨짐, 새 버전으로 대체)
+- `node_modules/` (npm install로 재생성)
+- `.next/` (빌드 시 재생성)
+
+### ✅ 보관할 파일:
+- 기존에 만든 이미지 파일들
+- 기타 중요한 문서들
+
+---
+
+## 💡 다음 단계 추천
+
+1. **이미지 추가**: `public/images/` 폴더에 병원/시술 이미지 추가
+2. **폼 연동**: Google Sheets API 또는 n8n Webhook 연결
+3. **도메인 연결**: gongnambeauty.kr 도메인 연결
+4. **SEO 최적화**: `src/app/layout.tsx`의 메타데이터 수정
+
+---
+
+## 🆘 도움이 필요하면
+
+언제든 물어보세요! 추가 기능 개발이나 오류 해결을 도와드릴게요.
+
+---
+
+**문서 작성일**: 2025년 12월 30일
+**프로젝트 버전**: 1.0.0

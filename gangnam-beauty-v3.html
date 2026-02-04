@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gangnam Beauty Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        display: ['Cormorant Garamond', 'serif'],
+                        sans: ['Noto Sans TC', 'Noto Sans SC', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+// Gangnam Beauty Agency Website
+// 중화권 고객을 위한 한국 프리미엄 피부과 연결 에이전시
+
+const translations = {
+  zh: {
+    nav: {
+      home: '首頁',
+      clinics: '合作醫院',
+      treatments: '熱門療程',
+      about: '關於我們',
+      contact: '免費諮詢'
+    },
+    hero: {
+      badge: '🏆 韓國官方認證醫療觀光代理',
+      title: '遇見最美的自己',
+      subtitle: '專屬華人的韓國頂級皮膚科服務',
+      description: '我們精選首爾江南區最頂尖的皮膚科診所，提供一站式美容醫療諮詢服務',
+      cta: '立即免費諮詢',
+      stats: {
+        clinics: '合作醫院',
+        patients: '服務人次',
+        satisfaction: '滿意度',
+        experience: '年經驗'
+      }
+    },
+    clinics: {
+      title: '精選合作醫院',
+      subtitle: '嚴選江南區頂級皮膚科，為您把關品質',
+      viewDetails: '了解更多',
+      bookNow: '立即預約',
+      location: '位置',
+      specialty: '專長',
+      dod: {
+        name: 'DOD 皮膚科',
+        subtitle: '明星藝人指定診所',
+        description: '頂級幹細胞療程、高壓氧艙皮膚管理、多種客製化療程',
+        specialties: ['幹細胞療程', '高壓氧艙', '客製化療程', '明星指定'],
+        address: '首爾市江南區清潭洞'
+      },
+      el: {
+        name: '清潭EL皮膚科',
+        subtitle: '眼下脂肪重建專家',
+        description: '10年經驗團隊，專注眼下脂肪重建、老化預防、表情矯正管理',
+        specialties: ['眼下脂肪重建', '老化預防', '表情矯正', '皮膚管理'],
+        address: '首爾市江南區清潭洞'
+      }
+    },
+    treatments: {
+      title: '熱門療程推薦',
+      subtitle: '最受華人客戶歡迎的療程項目',
+      items: [
+        { name: '眼下脂肪重組', desc: '告別黑眼圈與淚溝', price: '詢價', icon: '👁️' },
+        { name: 'Ulthera超聲刀', desc: '非手術拉提緊緻', price: '詢價', icon: '✨' },
+        { name: '玻尿酸填充', desc: '豐唇/填充淚溝', price: '詢價', icon: '💉' },
+        { name: '肉毒桿菌', desc: '瘦臉/除皺', price: '詢價', icon: '💎' },
+        { name: '皮秒雷射', desc: '淡斑美白', price: '詢價', icon: '⚡' },
+        { name: '水光針', desc: '深層補水', price: '詢價', icon: '💧' }
+      ]
+    },
+    services: {
+      title: '我們的服務',
+      subtitle: '全程中文服務，讓您安心變美',
+      items: [
+        { title: '免費諮詢', desc: '專業顧問一對一解答', icon: '💬' },
+        { title: '行程規劃', desc: '醫美+觀光完美結合', icon: '✈️' },
+        { title: '全程翻譯', desc: '中韓雙語陪同服務', icon: '🗣️' },
+        { title: '術後跟進', desc: '回國後持續關懷', icon: '❤️' }
+      ]
+    },
+    contact: {
+      title: '開始您的美麗旅程',
+      subtitle: '填寫表單，專人24小時內回覆',
+      form: {
+        name: '您的姓名',
+        phone: '聯繫方式 (WhatsApp/微信/Line/KakaoTalk)',
+        interest: '感興趣的療程',
+        message: '其他需求或問題',
+        submit: '提交諮詢',
+        success: '提交成功！我們會盡快聯繫您'
+      },
+      wechat: '微信諮詢',
+      whatsapp: 'WhatsApp'
+    },
+    footer: {
+      slogan: '您的美麗，我們用心守護',
+      address: '首爾市江南區清潭洞',
+      copyright: '© 2025 Gangnam Beauty. All rights reserved.',
+      disclaimer: '本網站僅提供醫療資訊諮詢，不構成醫療建議'
+    }
+  },
+  cn: {
+    nav: {
+      home: '首页',
+      clinics: '合作医院',
+      treatments: '热门疗程',
+      about: '关于我们',
+      contact: '免费咨询'
+    },
+    hero: {
+      badge: '🏆 韩国官方认证医疗观光代理',
+      title: '遇见最美的自己',
+      subtitle: '专属华人的韩国顶级皮肤科服务',
+      description: '我们精选首尔江南区最顶尖的皮肤科诊所，提供一站式美容医疗咨询服务',
+      cta: '立即免费咨询',
+      stats: {
+        clinics: '合作医院',
+        patients: '服务人次',
+        satisfaction: '满意度',
+        experience: '年经验'
+      }
+    },
+    clinics: {
+      title: '精选合作医院',
+      subtitle: '严选江南区顶级皮肤科，为您把关品质',
+      viewDetails: '了解更多',
+      bookNow: '立即预约',
+      location: '位置',
+      specialty: '专长',
+      dod: {
+        name: 'DOD 皮肤科',
+        subtitle: '明星艺人指定诊所',
+        description: '顶级干细胞疗程、高压氧舱皮肤管理、多种定制化疗程',
+        specialties: ['干细胞疗程', '高压氧舱', '定制化疗程', '明星指定'],
+        address: '首尔市江南区清潭洞'
+      },
+      el: {
+        name: '清潭EL皮肤科',
+        subtitle: '眼下脂肪重建专家',
+        description: '10年经验团队，专注眼下脂肪重建、老化预防、表情矫正管理',
+        specialties: ['眼下脂肪重建', '老化预防', '表情矫正', '皮肤管理'],
+        address: '首尔市江南区清潭洞'
+      }
+    },
+    treatments: {
+      title: '热门疗程推荐',
+      subtitle: '最受华人客户欢迎的疗程项目',
+      items: [
+        { name: '眼下脂肪重组', desc: '告别黑眼圈与泪沟', price: '询价', icon: '👁️' },
+        { name: 'Ulthera超声刀', desc: '非手术拉提紧致', price: '询价', icon: '✨' },
+        { name: '玻尿酸填充', desc: '丰唇/填充泪沟', price: '询价', icon: '💉' },
+        { name: '肉毒杆菌', desc: '瘦脸/除皱', price: '询价', icon: '💎' },
+        { name: '皮秒雷射', desc: '淡斑美白', price: '询价', icon: '⚡' },
+        { name: '水光针', desc: '深层补水', price: '询价', icon: '💧' }
+      ]
+    },
+    services: {
+      title: '我们的服务',
+      subtitle: '全程中文服务，让您安心变美',
+      items: [
+        { title: '免费咨询', desc: '专业顾问一对一解答', icon: '💬' },
+        { title: '行程规划', desc: '医美+观光完美结合', icon: '✈️' },
+        { title: '全程翻译', desc: '中韩双语陪同服务', icon: '🗣️' },
+        { title: '术后跟进', desc: '回国后持续关怀', icon: '❤️' }
+      ]
+    },
+    contact: {
+      title: '开始您的美丽旅程',
+      subtitle: '填写表单，专人24小时内回复',
+      form: {
+        name: '您的姓名',
+        phone: '联系方式 (WhatsApp/微信/Line/KakaoTalk)',
+        interest: '感兴趣的疗程',
+        message: '其他需求或问题',
+        submit: '提交咨询',
+        success: '提交成功！我们会尽快联系您'
+      },
+      wechat: '微信咨询',
+      whatsapp: 'WhatsApp'
+    },
+    footer: {
+      slogan: '您的美丽，我们用心守护',
+      address: '首尔市江南区清潭洞',
+      copyright: '© 2025 Gangnam Beauty. All rights reserved.',
+      disclaimer: '本网站仅提供医疗资讯咨询，不构成医疗建议'
+    }
+  },
+  ko: {
+    nav: {
+      home: '홈',
+      clinics: '제휴 병원',
+      treatments: '인기 시술',
+      about: '소개',
+      contact: '무료 상담'
+    },
+    hero: {
+      badge: '🏆 한국 공식 인증 의료관광 에이전시',
+      title: '가장 아름다운 나를 만나다',
+      subtitle: '화교 고객을 위한 한국 프리미엄 피부과 서비스',
+      description: '서울 강남 최고의 피부과를 엄선하여 원스톱 미용의료 컨설팅 서비스를 제공합니다',
+      cta: '무료 상담 신청',
+      stats: {
+        clinics: '제휴 병원',
+        patients: '누적 고객',
+        satisfaction: '만족도',
+        experience: '년 경력'
+      }
+    },
+    clinics: {
+      title: '엄선된 제휴 병원',
+      subtitle: '강남 최고의 피부과만을 선별했습니다',
+      viewDetails: '자세히 보기',
+      bookNow: '예약하기',
+      location: '위치',
+      specialty: '전문 분야',
+      dod: {
+        name: 'DOD 피부과',
+        subtitle: '연예인 지정 클리닉',
+        description: '프리미엄 줄기세포 시술, 고압산소챔버 피부관리, 다양한 맞춤 시술',
+        specialties: ['줄기세포 시술', '고압산소챔버', '맞춤 시술', '연예인 지정'],
+        address: '서울시 강남구 청담동'
+      },
+      el: {
+        name: '청담EL피부과',
+        subtitle: '눈밑지방 재건 전문',
+        description: '10년 경력 팀, 눈밑지방 재건수술, 노안 예방, 표정 교정 관리 전문',
+        specialties: ['눈밑지방 재건', '노안 예방', '표정 교정', '피부관리'],
+        address: '서울시 강남구 청담동'
+      }
+    },
+    treatments: {
+      title: '인기 시술 추천',
+      subtitle: '화교 고객에게 가장 인기 있는 시술',
+      items: [
+        { name: '눈밑지방재배치', desc: '다크서클/눈밑꺼짐 개선', price: '문의', icon: '👁️' },
+        { name: '울쎄라', desc: '비수술 리프팅', price: '문의', icon: '✨' },
+        { name: '필러', desc: '입술/눈밑 볼륨', price: '문의', icon: '💉' },
+        { name: '보톡스', desc: '윤곽/주름 개선', price: '문의', icon: '💎' },
+        { name: '피코레이저', desc: '잡티/미백', price: '문의', icon: '⚡' },
+        { name: '물광주사', desc: '깊은 수분 충전', price: '문의', icon: '💧' }
+      ]
+    },
+    services: {
+      title: '서비스 안내',
+      subtitle: '전 과정 중국어 서비스로 안심하세요',
+      items: [
+        { title: '무료 상담', desc: '전문 상담사 1:1 답변', icon: '💬' },
+        { title: '일정 계획', desc: '의료+관광 완벽 조합', icon: '✈️' },
+        { title: '통역 서비스', desc: '중한 이중언어 동행', icon: '🗣️' },
+        { title: '사후 관리', desc: '귀국 후 지속 케어', icon: '❤️' }
+      ]
+    },
+    contact: {
+      title: '아름다운 여정을 시작하세요',
+      subtitle: '양식 작성 시 24시간 내 전문 상담사가 연락드립니다',
+      form: {
+        name: '성함',
+        phone: '연락처 (WhatsApp/WeChat/Line/KakaoTalk)',
+        interest: '관심 시술',
+        message: '기타 문의사항',
+        submit: '상담 신청',
+        success: '신청 완료! 곧 연락드리겠습니다'
+      },
+      wechat: 'WeChat 상담',
+      whatsapp: 'WhatsApp'
+    },
+    footer: {
+      slogan: '당신의 아름다움을 진심으로 케어합니다',
+      address: '서울시 강남구 청담동',
+      copyright: '© 2025 Gangnam Beauty. All rights reserved.',
+      disclaimer: '본 웹사이트는 의료 정보 상담만 제공하며 의료 조언을 구성하지 않습니다'
+    }
+  }
+};
+
+function GangnamBeauty() {
+  const [lang, setLang] = useState('zh');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [showForm, setShowForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const t = translations[lang];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 3000);
+  };
+
+  return (
+    <div className="min-h-screen bg-stone-50 font-sans overflow-x-hidden">
+      {/* Custom Styles */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+        
+        * {
+          font-family: 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans KR', sans-serif;
+        }
+        
+        .font-display {
+          font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .gradient-gold {
+          background: linear-gradient(135deg, #D4AF37 0%, #F5E6B3 50%, #D4AF37 100%);
+        }
+        
+        .gradient-rose {
+          background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+        }
+        
+        .text-gold {
+          color: #B8860B;
+        }
+        
+        .bg-gold {
+          background-color: #D4AF37;
+        }
+        
+        .border-gold {
+          border-color: #D4AF37;
+        }
+        
+        .glass {
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .card-hover {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .shimmer {
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+          background-size: 200% 100%;
+          animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        
+        .float {
+          animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        .pattern-dots {
+          background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+          background-size: 20px 20px;
+        }
+        
+        .hero-bg {
+          background: 
+            linear-gradient(135deg, rgba(253, 242, 248, 0.95) 0%, rgba(252, 231, 243, 0.9) 100%),
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .clinic-gradient-dod {
+          background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .clinic-gradient-el {
+          background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+        }
+      `}</style>
+
+      {/* Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled ? 'glass shadow-lg py-3' : 'bg-transparent py-5'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
+              <span className="text-white text-lg font-bold">G</span>
+            </div>
+            <div>
+              <h1 className="font-display text-xl font-semibold text-stone-800 tracking-wide">
+                Gangnam Beauty
+              </h1>
+              <p className="text-xs text-stone-500">江南美學</p>
+            </div>
+          </div>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {Object.entries(t.nav).map(([key, value]) => (
+              <a
+                key={key}
+                href={`#${key}`}
+                className={`text-sm font-medium transition-colors hover:text-gold ${
+                  activeSection === key ? 'text-gold' : 'text-stone-600'
+                }`}
+              >
+                {value}
+              </a>
+            ))}
+          </div>
+
+          {/* Language Switcher */}
+          <div className="flex items-center gap-3">
+            <div className="flex bg-stone-100 rounded-full p-1">
+              {[
+                { code: 'zh', label: '繁' },
+                { code: 'cn', label: '简' },
+                { code: 'ko', label: '한' }
+              ].map((l) => (
+                <button
+                  key={l.code}
+                  onClick={() => setLang(l.code)}
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
+                    lang === l.code
+                      ? 'bg-gold text-white'
+                      : 'text-stone-500 hover:text-stone-700'
+                  }`}
+                >
+                  {l.label}
+                </button>
+              ))}
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden glass border-t mt-3">
+            <div className="px-6 py-4 space-y-3">
+              {Object.entries(t.nav).map(([key, value]) => (
+                <a
+                  key={key}
+                  href={`#${key}`}
+                  className="block text-stone-600 hover:text-gold font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {value}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="hero-bg min-h-screen flex items-center pt-20">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8 animate-fade-in-up">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-white/80 rounded-full px-4 py-2 shadow-sm">
+                <span className="text-sm">{t.hero.badge}</span>
+              </div>
+
+              {/* Main Title */}
+              <div className="space-y-4">
+                <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-stone-800 leading-tight">
+                  {t.hero.title}
+                </h2>
+                <p className="text-xl md:text-2xl text-gold font-medium">
+                  {t.hero.subtitle}
+                </p>
+              </div>
+
+              <p className="text-lg text-stone-600 max-w-xl leading-relaxed">
+                {t.hero.description}
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-4">
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="group relative px-8 py-4 bg-gold text-white rounded-full font-medium text-lg overflow-hidden transition-all hover:shadow-xl hover:shadow-amber-200/50"
+                >
+                  <span className="relative z-10">{t.hero.cta}</span>
+                  <div className="absolute inset-0 shimmer"></div>
+                </button>
+                <a
+                  href="#clinics"
+                  className="px-8 py-4 border-2 border-gold text-gold rounded-full font-medium text-lg hover:bg-gold hover:text-white transition-all"
+                >
+                  {t.nav.clinics}
+                </a>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-4 gap-4 pt-8">
+                {[
+                  { value: '2+', label: t.hero.stats.clinics },
+                  { value: '500+', label: t.hero.stats.patients },
+                  { value: '98%', label: t.hero.stats.satisfaction },
+                  { value: '5+', label: t.hero.stats.experience }
+                ].map((stat, i) => (
+                  <div key={i} className="text-center">
+                    <p className="font-display text-3xl md:text-4xl font-semibold text-gold">{stat.value}</p>
+                    <p className="text-xs md:text-sm text-stone-500 mt-1">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Hero Visual */}
+            <div className="relative hidden lg:block">
+              <div className="relative w-full aspect-square">
+                {/* Decorative Elements */}
+                <div className="absolute top-0 right-0 w-72 h-72 bg-pink-200/50 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-amber-200/50 rounded-full blur-3xl"></div>
+                
+                {/* Main Image Placeholder */}
+                <div className="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+                  <div className="w-full h-full bg-gradient-to-br from-pink-100 via-rose-50 to-amber-50 flex items-center justify-center">
+                    <div className="text-center space-y-4 float">
+                      <div className="text-8xl">✨</div>
+                      <p className="font-display text-2xl text-stone-400">K-Beauty Excellence</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Cards */}
+                <div className="absolute -left-8 top-1/4 bg-white rounded-2xl shadow-xl p-4 float" style={{ animationDelay: '0.5s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center text-2xl">👩‍⚕️</div>
+                    <div>
+                      <p className="font-semibold text-stone-800">專業醫師</p>
+                      <p className="text-sm text-stone-500">20+ years exp.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="absolute -right-4 bottom-1/3 bg-white rounded-2xl shadow-xl p-4 float" style={{ animationDelay: '1s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-2xl">⭐</div>
+                    <div>
+                      <p className="font-semibold text-stone-800">5.0 評分</p>
+                      <p className="text-sm text-stone-500">Google Reviews</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Clinics Section */}
+      <section id="clinics" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-block px-4 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-medium">
+              Partner Clinics
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-stone-800">
+              {t.clinics.title}
+            </h2>
+            <p className="text-lg text-stone-500 max-w-2xl mx-auto">
+              {t.clinics.subtitle}
+            </p>
+          </div>
+
+          {/* Clinic Cards */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* DOD Clinic */}
+            <div className="group card-hover bg-white rounded-3xl overflow-hidden shadow-lg border border-stone-100">
+              {/* Image Area */}
+              <div className="clinic-gradient-dod h-64 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <h3 className="font-display text-4xl font-light mb-2">DOD</h3>
+                    <p className="text-white/70">Dermatology</p>
+                  </div>
+                </div>
+                {/* Badge */}
+                <div className="absolute top-4 right-4 bg-gold text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {t.clinics.dod.subtitle}
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8 space-y-6">
+                <div>
+                  <h3 className="text-2xl font-semibold text-stone-800 mb-2">
+                    {t.clinics.dod.name}
+                  </h3>
+                  <p className="text-stone-600 leading-relaxed">
+                    {t.clinics.dod.description}
+                  </p>
+                </div>
+
+                {/* Specialties */}
+                <div>
+                  <p className="text-sm font-medium text-stone-500 mb-3">{t.clinics.specialty}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.clinics.dod.specialties.map((spec, i) => (
+                      <span key={i} className="px-3 py-1 bg-stone-100 rounded-full text-sm text-stone-600">
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-center gap-2 text-stone-500">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span className="text-sm">{t.clinics.dod.address}</span>
+                </div>
+
+                {/* CTA */}
+                <div className="flex gap-3 pt-4">
+                  <button
+                    onClick={() => setShowForm(true)}
+                    className="flex-1 py-3 bg-gold text-white rounded-full font-medium hover:bg-amber-600 transition-colors"
+                  >
+                    {t.clinics.bookNow}
+                  </button>
+                  <button className="px-6 py-3 border border-stone-200 rounded-full text-stone-600 hover:border-gold hover:text-gold transition-colors">
+                    {t.clinics.viewDetails}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* EL Clinic */}
+            <div className="group card-hover bg-white rounded-3xl overflow-hidden shadow-lg border border-stone-100">
+              {/* Image Area */}
+              <div className="clinic-gradient-el h-64 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center text-white">
+                    <h3 className="font-display text-4xl font-light mb-2">EL</h3>
+                    <p className="text-white/70">Dermatology</p>
+                  </div>
+                </div>
+                {/* Badge */}
+                <div className="absolute top-4 right-4 bg-gold text-white px-3 py-1 rounded-full text-sm font-medium">
+                  {t.clinics.el.subtitle}
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8 space-y-6">
+                <div>
+                  <h3 className="text-2xl font-semibold text-stone-800 mb-2">
+                    {t.clinics.el.name}
+                  </h3>
+                  <p className="text-stone-600 leading-relaxed">
+                    {t.clinics.el.description}
+                  </p>
+                </div>
+
+                {/* Specialties */}
+                <div>
+                  <p className="text-sm font-medium text-stone-500 mb-3">{t.clinics.specialty}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {t.clinics.el.specialties.map((spec, i) => (
+                      <span key={i} className="px-3 py-1 bg-stone-100 rounded-full text-sm text-stone-600">
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div className="flex items-center gap-2 text-stone-500">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span className="text-sm">{t.clinics.el.address}</span>
+                </div>
+
+                {/* CTA */}
+                <div className="flex gap-3 pt-4">
+                  <button
+                    onClick={() => setShowForm(true)}
+                    className="flex-1 py-3 bg-gold text-white rounded-full font-medium hover:bg-amber-600 transition-colors"
+                  >
+                    {t.clinics.bookNow}
+                  </button>
+                  <button className="px-6 py-3 border border-stone-200 rounded-full text-stone-600 hover:border-gold hover:text-gold transition-colors">
+                    {t.clinics.viewDetails}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Coming Soon - Expansion Notice */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-stone-100 rounded-full">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+              <span className="text-stone-600 text-sm">
+                {lang === 'ko' ? '더 많은 제휴 병원이 곧 추가됩니다' : lang === 'cn' ? '更多合作医院即将加入' : '更多合作醫院即將加入'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Treatments Section */}
+      <section id="treatments" className="py-24 gradient-rose">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-block px-4 py-1 bg-white/80 text-pink-600 rounded-full text-sm font-medium">
+              Popular Treatments
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-stone-800">
+              {t.treatments.title}
+            </h2>
+            <p className="text-lg text-stone-500 max-w-2xl mx-auto">
+              {t.treatments.subtitle}
+            </p>
+          </div>
+
+          {/* Treatment Cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.treatments.items.map((treatment, i) => (
+              <div
+                key={i}
+                className="card-hover bg-white rounded-2xl p-6 shadow-sm border border-pink-100"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
+                    {treatment.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-stone-800 mb-1">
+                      {treatment.name}
+                    </h3>
+                    <p className="text-stone-500 text-sm mb-3">
+                      {treatment.desc}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-gold font-medium">{treatment.price}</span>
+                      <button
+                        onClick={() => setShowForm(true)}
+                        className="text-sm text-pink-500 hover:text-pink-600 font-medium"
+                      >
+                        {lang === 'ko' ? '상담하기 →' : '諮詢 →'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="about" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Section Header */}
+          <div className="text-center mb-16 space-y-4">
+            <span className="inline-block px-4 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+              Our Services
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl font-light text-stone-800">
+              {t.services.title}
+            </h2>
+            <p className="text-lg text-stone-500 max-w-2xl mx-auto">
+              {t.services.subtitle}
+            </p>
+          </div>
+
+          {/* Service Cards */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {t.services.items.map((service, i) => (
+              <div
+                key={i}
+                className="text-center p-8 rounded-3xl bg-gradient-to-b from-stone-50 to-white border border-stone-100 card-hover"
+              >
+                <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-100 to-amber-100 rounded-3xl flex items-center justify-center text-4xl">
+                  {service.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-stone-800 mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-stone-500">
+                  {service.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-stone-900 text-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 pattern-dots opacity-5"></div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h2 className="font-display text-4xl md:text-5xl font-light">
+                  {t.contact.title}
+                </h2>
+                <p className="text-xl text-stone-400">
+                  {t.contact.subtitle}
+                </p>
+              </div>
+
+              {/* Contact Methods */}
+              <div className="space-y-4">
+                <a
+                  href="https://wa.me/821012345678"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-green-600 rounded-2xl hover:bg-green-700 transition-colors"
+                >
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium">{t.contact.whatsapp}</p>
+                    <p className="text-sm text-white/70">+82 10-1234-5678</p>
+                  </div>
+                </a>
+
+                <a
+                  href="#"
+                  className="flex items-center gap-4 p-4 bg-emerald-600 rounded-2xl hover:bg-emerald-700 transition-colors"
+                >
+                  <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c4.801 0 8.692-3.287 8.692-7.341 0-4.053-3.891-7.341-8.692-7.341zM5.785 10.403a.932.932 0 110-1.864.932.932 0 010 1.864zm5.812 0a.932.932 0 110-1.864.932.932 0 010 1.864z"/>
+                      <path d="M23.949 14.865c0-3.116-3.027-5.647-6.749-5.647-.096 0-.19.007-.285.01.062.405.096.817.096 1.233 0 4.741-4.467 8.59-9.974 8.59-.088 0-.176-.002-.263-.005.919 2.746 3.763 4.718 7.127 4.718.819 0 1.614-.1 2.36-.289a.675.675 0 01.56.077l1.492.872c.04.023.084.042.13.042.125 0 .228-.102.228-.228 0-.056-.023-.112-.038-.166l-.305-1.158a.462.462 0 01.167-.52c1.522-1.102 2.454-2.721 2.454-4.529z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium">{t.contact.wechat}</p>
+                    <p className="text-sm text-white/70">GangnamBeauty</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Right - Contact Form */}
+            <div className="bg-white rounded-3xl p-8 text-stone-800">
+              {formSubmitted ? (
+                <div className="text-center py-12">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
+                    <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-xl font-medium text-stone-800">
+                    {t.contact.form.success}
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-medium text-stone-600 mb-2">
+                      {t.contact.form.name}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-stone-600 mb-2">
+                      {t.contact.form.phone}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-stone-600 mb-2">
+                      {t.contact.form.interest}
+                    </label>
+                    <select className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all">
+                      {t.treatments.items.map((treatment, i) => (
+                        <option key={i} value={treatment.name}>{treatment.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-stone-600 mb-2">
+                      {t.contact.form.message}
+                    </label>
+                    <textarea
+                      rows={4}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all resize-none"
+                    ></textarea>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-gold text-white rounded-xl font-medium text-lg hover:bg-amber-600 transition-colors"
+                  >
+                    {t.contact.form.submit}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-stone-950 text-stone-400">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center">
+                <span className="text-white text-lg font-bold">G</span>
+              </div>
+              <div>
+                <h3 className="font-display text-lg text-white">Gangnam Beauty</h3>
+                <p className="text-xs">{t.footer.slogan}</p>
+              </div>
+            </div>
+            
+            <div className="text-center md:text-right">
+              <p className="text-sm">{t.footer.copyright}</p>
+              <p className="text-xs mt-1">{t.footer.disclaimer}</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating Contact Form Modal */}
+      {showForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative animate-fade-in-up">
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full hover:bg-stone-100 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <h3 className="text-2xl font-semibold text-stone-800 mb-6">{t.contact.title}</h3>
+            
+            {formSubmitted ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <p className="text-lg text-stone-800">{t.contact.form.success}</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  type="text"
+                  placeholder={t.contact.form.name}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none"
+                />
+                <input
+                  type="text"
+                  placeholder={t.contact.form.phone}
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none"
+                />
+                <select className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none">
+                  <option value="">{t.contact.form.interest}</option>
+                  {t.treatments.items.map((treatment, i) => (
+                    <option key={i} value={treatment.name}>{treatment.name}</option>
+                  ))}
+                </select>
+                <textarea
+                  rows={3}
+                  placeholder={t.contact.form.message}
+                  className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none resize-none"
+                ></textarea>
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-gold text-white rounded-xl font-medium hover:bg-amber-600 transition-colors"
+                >
+                  {t.contact.form.submit}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Floating WhatsApp Button */}
+      <a
+        href="https://wa.me/821012345678"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors z-40"
+      >
+        <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+      </a>
+    </div>
+  );
+}
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<GangnamBeauty />);
+    </script>
+</body>
+</html>
