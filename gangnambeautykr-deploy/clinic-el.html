@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清潭EL皮膚科 - 眼下脂肪重建專家 | Gangnam Beauty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        el: { primary: '#4CAF50', light: '#81C784', dark: '#388E3C', gradient: '#2E7D32' },
+                        gold: { DEFAULT: '#D4AF37', dark: '#B8860B', light: '#F5E6B3' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans KR', sans-serif; }
+        .gradient-el { background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%); }
+        .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .img-hover { transition: transform 0.3s ease; }
+        .img-hover:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <!-- 다국어 데이터 -->
+    <script>
+        const translations = {
+            zh: {
+                backHome: '返回首頁',
+                badge: '👁️ 眼下脂肪重建專家',
+                badgeKr: '눈밑지방 재건 전문',
+                clinicName: '清潭EL',
+                clinicSubtitle: 'Cheongdam EL Dermatology',
+                clinicKr: '청담이엘피부과의원',
+                heroDesc: '「EL」源自於院長的治療哲學<br>從根本(Elementary)治療老化的各種要素(Element)',
+                heroDescKr: '노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다',
+                tags: ['眼下脂肪重建', '老化預防', '表情矯正', '幹細胞治療'],
+                yearNum: '15年+',
+                yearDesc: '老化復原專業經驗',
+                philosophyTitle: '清潭EL皮膚科，源自於院長的哲學',
+                philosophyDesc: '您好，我是專注於健康、根本性老化復原的皮膚科專家，清潭EL金炳哲院長。<br><br>過去15年間，我一直在自然地復原面部老化，有幸治療過許多知名人士。<br>但在此，我想放下「治療名人的醫師」這個頭銜。<br>因為作為堅持健康老化復原治療的皮膚科專科醫師，這是我認為最重要的價值。',
+                philosophyQuote: '「從根本(Elementary)治療老化的各種要素(Element)」',
+                philosophyQuoteKr: '노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다',
+                doctorTitle: '代表院長',
+                doctorTitleKr: '대표원장',
+                doctorName: '金炳哲',
+                doctorNameKr: '김병철',
+                doctorCredentials: [
+                    '15年以上老化復原皮膚科專業經驗',
+                    '健康、根本性老化復原治療專家',
+                    '眼下脂肪完全重建術創始者',
+                    '治療過眾多名人及知名人士'
+                ],
+                doctorQuote: '「當患者說『自然地變好了，很滿意，很幸福，謝謝』時，<br>作為皮膚科專科醫師，沒有比這更令我開心的事了。」',
+                signatureTitle: '招牌療程：眼下脂肪完全重建術',
+                signatureSubtitle: '눈밑지방완전재건술',
+                stepsTitle: '三步驟完整重建',
+                steps: [
+                    { title: '眼下眼窩脂肪去除', desc: '精密去除突出的眼下脂肪及可能復發的脂肪' },
+                    { title: '眼窩隔膜強化', desc: '將眼窩隔膜撫平，防止凸起復發並提升維持力' },
+                    { title: '自體脂肪移植', desc: '在眼周6個部位進行富含幹細胞的微細自體脂肪移植，形成立體感' }
+                ],
+                cellRegenixTitle: 'CELL REGENIX',
+                cellRegenixSubtitle: '幹細胞治療矩陣',
+                cellRegenixSubtitleKr: '줄기세포 치료 매트릭스',
+                cellRegenixDesc: '以老化復原專家金炳哲院長的醫療哲學為基礎，<br>照顧皮膚美麗與健康，以及全身抗老化的<br>EL獨家高端抗老化解決方案',
+                cellFeatures: [
+                    { title: '延緩老化', desc: '皮膚彈性・皺紋・炎症改善' },
+                    { title: '皮膚再生', desc: '自體幹細胞基礎MCT細胞活性' },
+                    { title: '毛髮改善', desc: '升級版毛髮效果特許技術' }
+                ],
+                advantageTitle: '差異化優勢',
+                advantageSubtitle: '차별화 우세',
+                advantage1Title: '1人室私密治療系統',
+                advantage1Desc: '讓身心都能舒適放鬆，保護患者的個人隱私',
+                advantage1DescKr: '몸도 마음도 편하실 수 있게, 환자분의 개인 프라이버시를 보호해드립니다',
+                advantage2Title: '只推薦必要的治療・1:1客製化',
+                advantage2Desc: '追求誠實正確的治療，只推薦真正必要的療程',
+                advantage2DescKr: '정직하고 올바른 치료를 추구합니다. 꼭 필요한 치료만 권해드립니다',
+                galleryTitle: '診所環境',
+                gallerySubtitle: '병원 환경',
+                locationTitle: '診所位置',
+                locationSubtitle: '오시는 길',
+                addressTitle: '📍 地址',
+                addressTitleKr: '주소',
+                address: '首爾特別市江南區島山大路 417, 3樓 (MIMI GARDEN大樓)',
+                addressKr: '서울특별시 강남구 도산대로 417, 3층 (미미미가든 건물)',
+                transportTitle: '🚇 交通方式',
+                transport: '地鐵盆唐線 狎鷗亭羅德奧站 4號出口 步行5分鐘',
+                transportKr: '분당선 압구정로데오역 4번출구 도보 5분',
+                hoursTitle: '🕐 營業時間',
+                hours: ['週一至週五 10:00 - 19:00', '週六 10:00 - 15:00'],
+                hoursNote: '週日及節假日休息',
+                ctaTitle: '開始您的10年年輕計劃',
+                ctaSubtitle: '全程中文服務，讓您安心變美',
+                scanQR: '掃描QR碼聯繫我們',
+                orContact: '或透過以下方式聯繫',
+                email: '電子郵件',
+                instagram: 'Instagram',
+                wechat: '微信諮詢',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '您的姓名',
+                formContact: '聯繫方式 (WeChat/Line/WhatsApp)',
+                formInterest: '感興趣的療程',
+                formSubmit: '提交諮詢',
+                formSuccess: '提交成功！我們會盡快與您聯繫',
+                treatments: ['眼下脂肪重建', '眼周年輕化', '面部提拉', '客製化皮膚管理']
+            },
+            cn: {
+                backHome: '返回首页',
+                badge: '👁️ 眼下脂肪重建专家',
+                badgeKr: '눈밑지방 재건 전문',
+                clinicName: '清潭EL',
+                clinicSubtitle: 'Cheongdam EL Dermatology',
+                clinicKr: '청담이엘피부과의원',
+                heroDesc: '「EL」源自于院长的治疗哲学<br>从根本(Elementary)治疗老化的各种要素(Element)',
+                heroDescKr: '노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다',
+                tags: ['眼下脂肪重建', '老化预防', '表情矫正', '干细胞治疗'],
+                yearNum: '15年+',
+                yearDesc: '老化复原专业经验',
+                philosophyTitle: '清潭EL皮肤科，源自于院长的哲学',
+                philosophyDesc: '您好，我是专注于健康、根本性老化复原的皮肤科专家，清潭EL金炳哲院长。<br><br>过去15年间，我一直在自然地复原面部老化，有幸治疗过许多知名人士。<br>但在此，我想放下「治疗名人的医师」这个头衔。<br>因为作为坚持健康老化复原治疗的皮肤科专科医师，这是我认为最重要的价值。',
+                philosophyQuote: '「从根本(Elementary)治疗老化的各种要素(Element)」',
+                philosophyQuoteKr: '노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다',
+                doctorTitle: '代表院长',
+                doctorTitleKr: '대표원장',
+                doctorName: '金炳哲',
+                doctorNameKr: '김병철',
+                doctorCredentials: [
+                    '15年以上老化复原皮肤科专业经验',
+                    '健康、根本性老化复原治疗专家',
+                    '眼下脂肪完全重建术创始者',
+                    '治疗过众多名人及知名人士'
+                ],
+                doctorQuote: '「当患者说『自然地变好了，很满意，很幸福，谢谢』时，<br>作为皮肤科专科医师，没有比这更令我开心的事了。」',
+                signatureTitle: '招牌疗程：眼下脂肪完全重建术',
+                signatureSubtitle: '눈밑지방완전재건술',
+                stepsTitle: '三步骤完整重建',
+                steps: [
+                    { title: '眼下眼窝脂肪去除', desc: '精密去除突出的眼下脂肪及可能复发的脂肪' },
+                    { title: '眼窝隔膜强化', desc: '将眼窝隔膜抚平，防止凸起复发并提升维持力' },
+                    { title: '自体脂肪移植', desc: '在眼周6个部位进行富含干细胞的微细自体脂肪移植，形成立体感' }
+                ],
+                cellRegenixTitle: 'CELL REGENIX',
+                cellRegenixSubtitle: '干细胞治疗矩阵',
+                cellRegenixSubtitleKr: '줄기세포 치료 매트릭스',
+                cellRegenixDesc: '以老化复原专家金炳哲院长的医疗哲学为基础，<br>照顾皮肤美丽与健康，以及全身抗老化的<br>EL独家高端抗老化解决方案',
+                cellFeatures: [
+                    { title: '延缓老化', desc: '皮肤弹性・皱纹・炎症改善' },
+                    { title: '皮肤再生', desc: '自体干细胞基础MCT细胞活性' },
+                    { title: '毛发改善', desc: '升级版毛发效果特许技术' }
+                ],
+                advantageTitle: '差异化优势',
+                advantageSubtitle: '차별화 우세',
+                advantage1Title: '1人室私密治疗系统',
+                advantage1Desc: '让身心都能舒适放松，保护患者的个人隐私',
+                advantage1DescKr: '몸도 마음도 편하실 수 있게, 환자분의 개인 프라이버시를 보호해드립니다',
+                advantage2Title: '只推荐必要的治疗・1:1定制化',
+                advantage2Desc: '追求诚实正确的治疗，只推荐真正必要的疗程',
+                advantage2DescKr: '정직하고 올바른 치료를 추구합니다. 꼭 필요한 치료만 권해드립니다',
+                galleryTitle: '诊所环境',
+                gallerySubtitle: '병원 환경',
+                locationTitle: '诊所位置',
+                locationSubtitle: '오시는 길',
+                addressTitle: '📍 地址',
+                addressTitleKr: '주소',
+                address: '首尔特别市江南区岛山大路 417, 3楼 (MIMI GARDEN大楼)',
+                addressKr: '서울특별시 강남구 도산대로 417, 3층 (미미미가든 건물)',
+                transportTitle: '🚇 交通方式',
+                transport: '地铁盆唐线 狎鸥亭罗德奥站 4号出口 步行5分钟',
+                transportKr: '분당선 압구정로데오역 4번출구 도보 5분',
+                hoursTitle: '🕐 营业时间',
+                hours: ['周一至周五 10:00 - 19:00', '周六 10:00 - 15:00'],
+                hoursNote: '周日及节假日休息',
+                ctaTitle: '开始您的10年年轻计划',
+                ctaSubtitle: '全程中文服务，让您安心变美',
+                scanQR: '扫描QR码联系我们',
+                orContact: '或透过以下方式联系',
+                email: '电子邮件',
+                instagram: 'Instagram',
+                wechat: '微信咨询',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '您的姓名',
+                formContact: '联系方式 (WeChat/Line/WhatsApp)',
+                formInterest: '感兴趣的疗程',
+                formSubmit: '提交咨询',
+                formSuccess: '提交成功！我们会尽快与您联系',
+                treatments: ['眼下脂肪重建', '眼周年轻化', '面部提拉', '定制化皮肤管理']
+            },
+            ko: {
+                backHome: '홈으로 돌아가기',
+                badge: '👁️ 눈밑지방 재건 전문',
+                badgeKr: '眼下脂肪重建專家',
+                clinicName: '청담EL',
+                clinicSubtitle: 'Cheongdam EL Dermatology',
+                clinicKr: '청담이엘피부과의원',
+                heroDesc: '「EL」은 원장의 치료 철학에서 유래<br>노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다',
+                heroDescKr: '從根本(Elementary)治療老化的各種要素(Element)',
+                tags: ['눈밑지방재건', '노화예방', '표정교정', '줄기세포치료'],
+                yearNum: '15년+',
+                yearDesc: '노화복원 전문 경험',
+                philosophyTitle: '청담EL피부과, 원장의 철학에서 유래',
+                philosophyDesc: '안녕하세요, 건강하고 근본적인 노화 복원에 집중하는 피부과 전문의 청담EL 김병철 원장입니다.<br><br>지난 15년간 자연스러운 얼굴 노화 복원을 해오면서 많은 유명인을 치료할 기회가 있었습니다.<br>하지만 이 자리에서 "유명인을 치료하는 의사"라는 타이틀은 내려놓고 싶습니다.<br>건강한 노화 복원 치료를 고집하는 피부과 전문의로서, 이것이 제가 가장 중요하게 생각하는 가치이기 때문입니다.',
+                philosophyQuote: '「노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다」',
+                philosophyQuoteKr: '從根本(Elementary)治療老化的各種要素(Element)',
+                doctorTitle: '대표원장',
+                doctorTitleKr: '代表院長',
+                doctorName: '김병철',
+                doctorNameKr: '金炳哲',
+                doctorCredentials: [
+                    '15년 이상 노화복원 피부과 전문 경험',
+                    '건강하고 근본적인 노화복원 치료 전문가',
+                    '눈밑지방완전재건술 창시자',
+                    '다수 유명인 및 명사 치료 경험'
+                ],
+                doctorQuote: '「환자분이 "자연스럽게 좋아졌다, 만족스럽다, 행복하다, 감사하다"고 말씀해 주실 때,<br>피부과 전문의로서 이보다 더 기쁜 일은 없습니다.」',
+                signatureTitle: '시그니처 시술: 눈밑지방완전재건술',
+                signatureSubtitle: '眼下脂肪完全重建術',
+                stepsTitle: '3단계 완전 재건',
+                steps: [
+                    { title: '눈밑 안와지방 제거', desc: '돌출된 눈밑지방과 재발 가능한 지방을 정밀하게 제거' },
+                    { title: '안와격막 강화', desc: '안와격막을 평평하게 해 돌출 재발 방지 및 유지력 향상' },
+                    { title: '자가지방 이식', desc: '눈 주위 6개 부위에 줄기세포가 풍부한 미세 자가지방 이식으로 입체감 형성' }
+                ],
+                cellRegenixTitle: 'CELL REGENIX',
+                cellRegenixSubtitle: '줄기세포 치료 매트릭스',
+                cellRegenixSubtitleKr: '幹細胞治療矩陣',
+                cellRegenixDesc: '노화복원 전문의 김병철 원장의 의료 철학을 바탕으로<br>피부의 아름다움과 건강, 그리고 전신 안티에이징을 케어하는<br>EL만의 프리미엄 안티에이징 솔루션',
+                cellFeatures: [
+                    { title: '노화 지연', desc: '피부 탄력・주름・염증 개선' },
+                    { title: '피부 재생', desc: '자가줄기세포 기반 MCT 세포활성' },
+                    { title: '모발 개선', desc: '업그레이드된 모발효과 특허기술' }
+                ],
+                advantageTitle: '차별화 우위',
+                advantageSubtitle: '差異化優勢',
+                advantage1Title: '1인실 프라이빗 치료 시스템',
+                advantage1Desc: '몸도 마음도 편하실 수 있게, 환자분의 개인 프라이버시를 보호해드립니다',
+                advantage1DescKr: '讓身心都能舒適放鬆，保護患者的個人隱私',
+                advantage2Title: '필요한 치료만 추천・1:1 맞춤',
+                advantage2Desc: '정직하고 올바른 치료를 추구합니다. 꼭 필요한 치료만 권해드립니다',
+                advantage2DescKr: '追求誠實正確的治療，只推薦真正必要的療程',
+                galleryTitle: '병원 환경',
+                gallerySubtitle: '診所環境',
+                locationTitle: '오시는 길',
+                locationSubtitle: '診所位置',
+                addressTitle: '📍 주소',
+                addressTitleKr: '地址',
+                address: '서울특별시 강남구 도산대로 417, 3층 (미미미가든 건물)',
+                addressKr: '首爾特別市江南區島山大路 417, 3樓 (MIMI GARDEN大樓)',
+                transportTitle: '🚇 교통편',
+                transport: '분당선 압구정로데오역 4번출구 도보 5분',
+                transportKr: '地鐵盆唐線 狎鷗亭羅德奧站 4號出口 步行5分鐘',
+                hoursTitle: '🕐 영업시간',
+                hours: ['월-금 10:00 - 19:00', '토 10:00 - 15:00'],
+                hoursNote: '일요일 및 공휴일 휴무',
+                ctaTitle: '10년 젊어지는 플랜을 시작하세요',
+                ctaSubtitle: '전 과정 중국어 서비스로 안심하세요',
+                scanQR: 'QR코드를 스캔하여 연락하세요',
+                orContact: '또는 아래 방법으로 연락하세요',
+                email: '이메일',
+                instagram: 'Instagram',
+                wechat: 'WeChat',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '이름',
+                formContact: '연락처 (WeChat/Line/WhatsApp)',
+                formInterest: '관심 시술',
+                formSubmit: '상담 신청',
+                formSuccess: '신청 완료! 빠른 시일 내에 연락드리겠습니다',
+                treatments: ['눈밑지방재건', '눈 주위 젊음', '얼굴 리프팅', '맞춤형 피부관리']
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function getLangFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('lang') || 'zh';
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('gangnamBeautyLang', lang);
+            updateContent();
+            updateLangButtons();
+        }
+
+        function updateLangButtons() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === currentLang) {
+                    btn.classList.add('bg-gold', 'text-white');
+                    btn.classList.remove('text-stone-500', 'hover:text-stone-700');
+                } else {
+                    btn.classList.remove('bg-gold', 'text-white');
+                    btn.classList.add('text-stone-500', 'hover:text-stone-700');
+                }
+            });
+        }
+
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            // 네비게이션
+            document.getElementById('backHomeText').textContent = t.backHome;
+            document.getElementById('backHomeLink').href = `index.html?lang=${currentLang}`;
+            
+            // 히어로 섹션
+            document.getElementById('heroBadge').innerHTML = `${t.badge} · ${t.badgeKr}`;
+            document.getElementById('clinicName').textContent = t.clinicName;
+            document.getElementById('clinicSubtitle').textContent = t.clinicSubtitle;
+            document.getElementById('clinicKr').textContent = t.clinicKr;
+            document.getElementById('heroDesc').innerHTML = `${t.heroDesc}<br><span class="text-sm opacity-80">${t.heroDescKr}</span>`;
+            
+            const tagsHtml = t.tags.map(tag => `<span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">${tag}</span>`).join('');
+            document.getElementById('heroTags').innerHTML = tagsHtml;
+            
+            document.getElementById('yearNum').textContent = t.yearNum;
+            document.getElementById('yearDesc').textContent = t.yearDesc;
+            
+            // 철학 섹션
+            document.getElementById('philosophyTitle').textContent = t.philosophyTitle;
+            document.getElementById('philosophyDesc').innerHTML = t.philosophyDesc;
+            document.getElementById('philosophyQuote').textContent = t.philosophyQuote;
+            document.getElementById('philosophyQuoteKr').textContent = t.philosophyQuoteKr;
+            
+            // 의사 섹션
+            document.getElementById('doctorTitle').innerHTML = `${t.doctorTitle} <span class="text-stone-500">${t.doctorTitleKr}</span>`;
+            document.getElementById('doctorName').innerHTML = `${t.doctorName} <span class="text-stone-500">${t.doctorNameKr}</span>`;
+            
+            const credentialsHtml = t.doctorCredentials.map(c => `
+                <p class="flex items-center gap-3">
+                    <span class="w-2 h-2 bg-el-primary rounded-full"></span>
+                    ${c}
+                </p>
+            `).join('');
+            document.getElementById('doctorCredentials').innerHTML = credentialsHtml;
+            document.getElementById('doctorQuote').innerHTML = t.doctorQuote;
+            
+            // 시그니처 시술
+            document.getElementById('signatureTitle').textContent = t.signatureTitle;
+            document.getElementById('signatureSubtitle').textContent = t.signatureSubtitle;
+            document.getElementById('stepsTitle').textContent = t.stepsTitle;
+            
+            const stepsHtml = t.steps.map((step, i) => `
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-el-primary text-white rounded-full flex items-center justify-center font-bold shrink-0">0${i+1}</div>
+                    <div>
+                        <h4 class="font-bold text-stone-800">${step.title}</h4>
+                        <p class="text-stone-600">${step.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('stepsContainer').innerHTML = stepsHtml;
+            
+            // Cell Regenix
+            document.getElementById('cellRegenixSubtitle').innerHTML = `${t.cellRegenixSubtitle} · ${t.cellRegenixSubtitleKr}`;
+            document.getElementById('cellRegenixDesc').innerHTML = t.cellRegenixDesc;
+            
+            const cellFeaturesHtml = t.cellFeatures.map(f => `
+                <div class="text-center">
+                    <p class="text-2xl font-bold">${f.title}</p>
+                    <p class="text-sm opacity-80">${f.desc}</p>
+                </div>
+            `).join('');
+            document.getElementById('cellFeatures').innerHTML = cellFeaturesHtml;
+            
+            // 차별화
+            document.getElementById('advantageTitle').textContent = t.advantageTitle;
+            document.getElementById('advantageSubtitle').textContent = t.advantageSubtitle;
+            document.getElementById('advantage1Title').textContent = t.advantage1Title;
+            document.getElementById('advantage1Desc').textContent = t.advantage1Desc;
+            document.getElementById('advantage1DescKr').textContent = t.advantage1DescKr;
+            document.getElementById('advantage2Title').textContent = t.advantage2Title;
+            document.getElementById('advantage2Desc').textContent = t.advantage2Desc;
+            document.getElementById('advantage2DescKr').textContent = t.advantage2DescKr;
+            
+            // 갤러리
+            document.getElementById('galleryTitle').textContent = t.galleryTitle;
+            document.getElementById('gallerySubtitle').textContent = t.gallerySubtitle;
+            
+            // 위치
+            document.getElementById('locationTitle').textContent = t.locationTitle;
+            document.getElementById('locationSubtitle').textContent = t.locationSubtitle;
+            document.getElementById('addressTitle').innerHTML = `${t.addressTitle} <span class="text-stone-500">${t.addressTitleKr}</span>`;
+            document.getElementById('addressText').textContent = t.address;
+            document.getElementById('addressTextKr').textContent = t.addressKr;
+            document.getElementById('transportTitle').textContent = t.transportTitle;
+            document.getElementById('transportText').textContent = t.transport;
+            document.getElementById('transportTextKr').textContent = t.transportKr;
+            document.getElementById('hoursTitle').textContent = t.hoursTitle;
+            document.getElementById('hoursText').innerHTML = t.hours.map(h => `<p class="text-stone-600">${h}</p>`).join('');
+            document.getElementById('hoursNote').textContent = t.hoursNote;
+            
+            // Contact 섹션
+            document.getElementById('ctaTitle').textContent = t.ctaTitle;
+            document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+            document.getElementById('scanQRText').textContent = t.scanQR;
+            document.getElementById('wechatLabel').textContent = t.wechat;
+            document.getElementById('whatsappLabel').textContent = t.whatsapp;
+            document.getElementById('kakaoLabel').textContent = t.kakao;
+            document.getElementById('lineLabel').textContent = t.line;
+            document.getElementById('orContactText').textContent = t.orContact;
+            document.getElementById('emailLabel').textContent = t.email;
+            document.getElementById('instagramLabel').textContent = t.instagram;
+            document.getElementById('formNameInput').placeholder = t.formName;
+            document.getElementById('formContactInput').placeholder = t.formContact;
+            document.getElementById('formInterestSelect').innerHTML = `<option value="">${t.formInterest}</option>` + 
+                t.treatments.map(tr => `<option value="${tr}">${tr}</option>`).join('');
+            document.getElementById('formSubmitBtn').textContent = t.formSubmit;
+            document.getElementById('formSuccessText').textContent = t.formSuccess;
+        }
+
+        // 폼 제출 처리
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            const data = {
+                name: formData.get('name'),
+                contact: formData.get('contact'),
+                interest: formData.get('interest'),
+                lang: currentLang,
+                source: 'clinic-el'
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbwIQl8BukeRQ81R_dJPQ2aQP_gzrVl1U--vZEC4nHvERbExv0ezJYr36YY9J1dcTNAD/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById('contactForm').classList.add('hidden');
+                document.getElementById('formSuccess').classList.remove('hidden');
+            }).catch(err => {
+                console.error('Error:', err);
+                alert('提交失敗，請稍後再試');
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            currentLang = getLangFromUrl() || localStorage.getItem('gangnamBeautyLang') || 'zh';
+            updateContent();
+            updateLangButtons();
+            
+            // 폼 이벤트 리스너 추가
+            document.getElementById('contactForm').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a id="backHomeLink" href="index.html" class="flex items-center gap-2 text-stone-600 hover:text-el-primary transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <span id="backHomeText">返回首頁</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="images/el/청담이엘로고.jpg" alt="EL Logo" class="h-10 rounded">
+                    <span class="font-medium text-stone-800 hidden sm:block">Cheongdam EL</span>
+                </div>
+                <!-- 언어 전환 버튼 -->
+                <div class="flex bg-stone-100 rounded-full p-1">
+                    <button onclick="setLang('zh')" data-lang="zh" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all bg-gold text-white">繁</button>
+                    <button onclick="setLang('cn')" data-lang="cn" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all text-stone-500 hover:text-stone-700">简</button>
+                    <button onclick="setLang('ko')" data-lang="ko" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all text-stone-500 hover:text-stone-700">한</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-el pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <span id="heroBadge" class="inline-block px-4 py-2 bg-gold text-white rounded-full text-sm font-medium mb-6">
+                        👁️ 眼下脂肪重建專家 · 눈밑지방 재건 전문
+                    </span>
+                    <h1 id="clinicName" class="text-5xl md:text-6xl font-light text-white mb-4 tracking-wider">清潭EL</h1>
+                    <p id="clinicSubtitle" class="text-2xl text-white/80 mb-2">Cheongdam EL Dermatology</p>
+                    <p id="clinicKr" class="text-lg text-gold mb-6">청담이엘피부과의원</p>
+                    <p id="heroDesc" class="text-white/90 text-lg leading-relaxed mb-8">
+                        「EL」源自於院長的治療哲學<br>
+                        從根本(Elementary)治療老化的各種要素(Element)<br>
+                        <span class="text-sm opacity-80">노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다</span>
+                    </p>
+                    <div id="heroTags" class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">眼下脂肪重建</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">老化預防</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">表情矯正</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">幹細胞治療</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="images/el/el_1.jpg" alt="清潭EL 金炳哲院長" class="rounded-2xl shadow-2xl w-full">
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">
+                        <p id="yearNum" class="text-el-primary font-bold">15年+</p>
+                        <p id="yearDesc" class="text-sm text-stone-600">老化復原專業經驗</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="text-5xl font-serif text-el-primary mb-8">E</div>
+                <h2 id="philosophyTitle" class="text-3xl font-bold text-stone-800 mb-6">清潭EL皮膚科，源自於院長的哲學</h2>
+                <p id="philosophyDesc" class="text-lg text-stone-600 leading-relaxed mb-8">
+                    您好，我是專注於健康、根本性老化復原的皮膚科專家，清潭EL金炳哲院長。<br><br>
+                    過去15年間，我一直在自然地復原面部老化，有幸治療過許多知名人士。<br>
+                    但在此，我想放下「治療名人的醫師」這個頭銜。<br>
+                    因為作為堅持健康老化復原治療的皮膚科專科醫師，這是我認為最重要的價值。
+                </p>
+                <div class="bg-stone-100 rounded-2xl p-8">
+                    <p id="philosophyQuote" class="text-xl text-el-dark font-medium">
+                        「從根本(Elementary)治療老化的各種要素(Element)」
+                    </p>
+                    <p id="philosophyQuoteKr" class="text-stone-500 mt-2">노화의 다양한 요소(Element)들을 근본적(Elementary)으로 치료합니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Section -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="images/el/청담_원장.jpg" alt="金炳哲院長" class="rounded-2xl shadow-xl w-full max-w-md mx-auto">
+                </div>
+                <div>
+                    <span id="doctorTitle" class="text-el-primary font-medium">代表院長 <span class="text-stone-500">대표원장</span></span>
+                    <h2 id="doctorName" class="text-4xl font-bold text-stone-800 mt-2 mb-4">金炳哲 <span class="text-stone-500">김병철</span></h2>
+                    <p class="text-xl text-stone-600 mb-6">Dr. Byungchul Kim</p>
+                    <div id="doctorCredentials" class="space-y-3 text-stone-700">
+                        <!-- JS로 생성 -->
+                    </div>
+                    <div class="mt-8 p-6 bg-white rounded-xl">
+                        <p id="doctorQuote" class="text-stone-600 italic">
+                            「當患者說『自然地變好了，很滿意，很幸福，謝謝』時，<br>
+                            作為皮膚科專科醫師，沒有比這更令我開心的事了。」
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Treatment -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="signatureTitle" class="text-3xl font-bold text-stone-800 mb-4">招牌療程：眼下脂肪完全重建術</h2>
+                <p id="signatureSubtitle" class="text-stone-600">눈밑지방완전재건술</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <img src="images/el/눈밑지방완전재건술.jpg" alt="眼下脂肪完全重建術" class="rounded-2xl shadow-xl w-full mb-6">
+                    <img src="images/el/눈밑지방완전재건술2.jpg" alt="Before After" class="rounded-2xl shadow-xl w-full">
+                </div>
+                <div>
+                    <h3 id="stepsTitle" class="text-2xl font-bold text-stone-800 mb-6">三步驟完整重建</h3>
+                    <img src="images/el/눈밑지방완전재건술3.jpg" alt="治療過程" class="rounded-xl shadow-lg w-full mb-8">
+                    <div id="stepsContainer" class="space-y-6">
+                        <!-- JS로 생성 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cell Regenix -->
+    <section class="py-20 bg-gradient-to-r from-amber-500 to-amber-600">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h2 id="cellRegenixTitle" class="text-4xl font-bold mb-6">CELL REGENIX</h2>
+                    <p id="cellRegenixSubtitle" class="text-2xl mb-4">幹細胞治療矩陣 · 줄기세포 치료 매트릭스</p>
+                    <p id="cellRegenixDesc" class="text-white/90 leading-relaxed mb-8">
+                        以老化復原專家金炳哲院長的醫療哲學為基礎，<br>
+                        照顧皮膚美麗與健康，以及全身抗老化的<br>
+                        EL獨家高端抗老化解決方案
+                    </p>
+                    <div id="cellFeatures" class="grid grid-cols-3 gap-4">
+                        <!-- JS로 생성 -->
+                    </div>
+                </div>
+                <div>
+                    <img src="images/el/청담_10년동안_프로젝트.jpg" alt="Cell Regenix" class="rounded-2xl shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why EL -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="advantageTitle" class="text-3xl font-bold text-stone-800 mb-4">差異化優勢</h2>
+                <p id="advantageSubtitle" class="text-stone-600">차별화 우세</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-stone-50 rounded-2xl p-8 flex gap-6">
+                    <img src="images/el/청담_3.jpg" alt="1人室私密治療" class="w-1/2 rounded-xl object-cover">
+                    <div>
+                        <h3 id="advantage1Title" class="text-xl font-bold text-stone-800 mb-3">1人室私密治療系統</h3>
+                        <p id="advantage1Desc" class="text-stone-600">讓身心都能舒適放鬆，保護患者的個人隱私</p>
+                        <p id="advantage1DescKr" class="text-sm text-stone-500 mt-2">몸도 마음도 편하실 수 있게, 환자분의 개인 프라이버시를 보호해드립니다</p>
+                    </div>
+                </div>
+                <div class="bg-stone-50 rounded-2xl p-8">
+                    <h3 id="advantage2Title" class="text-xl font-bold text-stone-800 mb-3">只推薦必要的治療・1:1客製化</h3>
+                    <p id="advantage2Desc" class="text-stone-600">追求誠實正確的治療，只推薦真正必要的療程</p>
+                    <p id="advantage2DescKr" class="text-sm text-stone-500 mt-2">정직하고 올바른 치료를 추구합니다. 꼭 필요한 치료만 권해드립니다</p>
+                </div>
+            </div>
+            <div class="mt-8">
+                <img src="images/el/청담_5.jpg" alt="差異化優勢" class="rounded-2xl shadow-lg w-full max-w-2xl mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinic Gallery -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="galleryTitle" class="text-3xl font-bold text-stone-800 mb-4">診所環境</h2>
+                <p id="gallerySubtitle" class="text-stone-600">병원 환경</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <img src="images/el/청담_병원사진_1.jpg" alt="清潭EL 接待處" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-48 object-cover">
+                <img src="images/el/청담_병원사진_2.jpg" alt="清潭EL 大廳" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-48 object-cover">
+                <img src="images/el/청담_병원사진_3.jpg" alt="清潭EL 治療室" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-48 object-cover">
+                <img src="images/el/청담_병원사진_4.jpg" alt="清潭EL 休息室" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-48 object-cover">
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+                <img src="images/el/청담_기계.jpg" alt="清潭EL 設備" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-64 object-cover">
+                <img src="images/el/청담_기계2.jpg" alt="清潭EL 手術室" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-64 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="locationTitle" class="text-3xl font-bold text-stone-800 mb-4">診所位置</h2>
+                <p id="locationSubtitle" class="text-stone-600">오시는 길</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="images/el/청담_EL_지도.jpg" alt="清潭EL 地圖" class="rounded-2xl shadow-xl w-full">
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 id="addressTitle" class="text-xl font-bold text-stone-800 mb-2">📍 地址 <span class="text-stone-500">주소</span></h3>
+                        <p id="addressText" class="text-stone-600">首爾特別市江南區島山大路 417, 3樓 (MIMI GARDEN大樓)</p>
+                        <p id="addressTextKr" class="text-stone-500">서울특별시 강남구 도산대로 417, 3층 (미미미가든 건물)</p>
+                    </div>
+                    <div>
+                        <h3 id="transportTitle" class="text-xl font-bold text-stone-800 mb-2">🚇 交通方式</h3>
+                        <p id="transportText" class="text-stone-600">地鐵盆唐線 狎鷗亭羅德奧站 4號出口 步行5分鐘</p>
+                        <p id="transportTextKr" class="text-stone-500">분당선 압구정로데오역 4번출구 도보 5분</p>
+                    </div>
+                    <div>
+                        <h3 id="hoursTitle" class="text-xl font-bold text-stone-800 mb-2">🕐 營業時間</h3>
+                        <div id="hoursText">
+                            <p class="text-stone-600">週一至週五 10:00 - 19:00</p>
+                            <p class="text-stone-600">週六 10:00 - 15:00</p>
+                        </div>
+                        <p id="hoursNote" class="text-stone-500">週日及節假日休息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 id="ctaTitle" class="text-3xl font-bold mb-4">開始您的10年年輕計劃</h2>
+                <p id="ctaSubtitle" class="text-stone-400">全程中文服務，讓您安心變美</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left - QR Codes -->
+                <div class="lg:col-span-2">
+                    <p id="scanQRText" class="text-center text-stone-400 mb-6">掃描QR碼聯繫我們</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- WeChat -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/wechat_qrcode.png" alt="WeChat QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span id="wechatLabel" class="text-stone-800 font-medium text-sm">微信諮詢</span>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/whatsapp_qrcode.jpg" alt="WhatsApp QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                                <span id="whatsappLabel" class="text-stone-800 font-medium text-sm">WhatsApp</span>
+                            </div>
+                        </div>
+
+                        <!-- KakaoTalk -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/kakao_qrcode.png" alt="KakaoTalk QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                <span id="kakaoLabel" class="text-stone-800 font-medium text-sm">KakaoTalk</span>
+                            </div>
+                        </div>
+
+                        <!-- Line -->
+                        <a href="https://line.me/R/ti/p/@559aibvg" target="_blank" class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow block">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/line_qrcode.jpg" alt="Line QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span id="lineLabel" class="text-stone-800 font-medium text-sm">Line</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right - Contact Info & Form -->
+                <div class="space-y-6">
+                    <!-- Direct Contact -->
+                    <div class="bg-white/10 rounded-2xl p-6 space-y-4">
+                        <p id="orContactText" class="text-stone-400 text-sm">或透過以下方式聯繫</p>
+
+                        <!-- Email -->
+                        <a href="mailto:gangnambeautykr@gmail.com" class="flex items-center gap-4 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="emailLabel" class="text-sm text-stone-400">電子郵件</p>
+                                <p class="font-medium">gangnambeautykr@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/gangnambeauty.kr" target="_blank" class="flex items-center gap-4 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="instagramLabel" class="text-sm text-stone-400">Instagram</p>
+                                <p class="font-medium">@gangnambeauty.kr</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Quick Form -->
+                    <div class="bg-white rounded-2xl p-6 text-stone-800">
+                        <form id="contactForm" class="space-y-4">
+                            <input type="text" name="name" id="formNameInput" placeholder="您的姓名" required
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-el-primary focus:ring-2 focus:ring-el-primary/20 outline-none text-sm">
+                            <input type="text" name="contact" id="formContactInput" placeholder="聯繫方式 (WeChat/Line/WhatsApp)" required
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-el-primary focus:ring-2 focus:ring-el-primary/20 outline-none text-sm">
+                            <select name="interest" id="formInterestSelect"
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-el-primary focus:ring-2 focus:ring-el-primary/20 outline-none text-sm">
+                                <option value="">感興趣的療程</option>
+                            </select>
+                            <button type="submit" id="formSubmitBtn"
+                                class="w-full py-3 bg-el-primary text-white rounded-xl font-medium hover:bg-el-dark transition-colors">
+                                提交諮詢
+                            </button>
+                        </form>
+                        <div id="formSuccess" class="hidden text-center py-6">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p id="formSuccessText" class="text-lg font-medium text-stone-800">提交成功！我們會盡快與您聯繫</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="images/el/청담이엘로고.jpg" alt="EL Logo" class="h-16 mx-auto mb-4 rounded">
+            <p class="text-stone-400 mb-4">Cheongdam EL Dermatology · 청담이엘피부과의원</p>
+            <p class="text-stone-500 text-sm">© 2025 Gangnam Beauty Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Button -->
+    <a href="https://line.me/R/ti/p/@559aibvg" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors z-40">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+</body>
+</html>
