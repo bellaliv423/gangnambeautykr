@@ -26,5 +26,8 @@ npm-debug.log*
 .env.local
 .env.*.local
 
+# KKUMI Agency (민감 정보 포함 - 업로드 금지)
+KKUMI_AGENCY_CONTEXT.md
+
 # Large folders (archive)
 gangnam-beauty-website/archive/과거/gangnam-preview/node_modules/
