@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOD 皮膚科 - 明星藝人指定診所 | Gangnam Beauty</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dod: { primary: '#0d7377', light: '#14a5a8', dark: '#0a5c5e' },
+                        gold: { DEFAULT: '#D4AF37', dark: '#B8860B', light: '#F5E6B3' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans KR', sans-serif; }
+        .gradient-dod { background: linear-gradient(135deg, #0d7377 0%, #14a5a8 100%); }
+        .glass { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); }
+        .img-hover { transition: transform 0.3s ease; }
+        .img-hover:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-stone-50">
+
+    <!-- 다국어 데이터 -->
+    <script>
+        const translations = {
+            zh: {
+                backHome: '返回首頁',
+                badge: '⭐ 明星藝人指定診所',
+                tagline: '연예인 지정 클리닉',
+                subtitle: 'Dermatology On Demand',
+                koreanName: '디오디피부과의원 청담',
+                heroDesc: '韓國首家獲得「先進再生醫療機構」認證的皮膚科診所',
+                heroDescKr: '피부과 최초 첨단재생의료 실시기관 선정',
+                tags: ['幹細胞療程', '高壓氧艙', 'Ulthera超聲刀', '客製化療程'],
+                year: '2025年',
+                yearDesc: '江南區醫療觀光協力機關',
+                whyTitle: '為什麼選擇 DOD？',
+                whySubtitle: 'DOD만의 특별한 이유',
+                features: [
+                    { icon: '🧬', title: '幹細胞治療', desc: '資深專業醫療團隊的幹細胞複合治療', descKr: '숙련된 전문 의료진의 줄기세포 복합치료' },
+                    { icon: '👨‍⚕️', title: '資深醫療團隊', desc: '豐富皮膚治療經驗，提拉、皮膚補水、填充等', descKr: '다양한 피부 시술 경험으로 리프팅, 스킨부스터, 필러 등' },
+                    { icon: '🔬', title: '客製化皮膚檢測', desc: '使用Morpheus 3D、Mark-Vu等最新設備', descKr: '모르페우스 3D, 마크뷰 등 최신 기기를 활용' },
+                    { icon: '🚪', title: '私密診療室', desc: '基於皮膚檢測數據，醫療團隊諮詢後只推薦必要療程', descKr: '피부 검사 데이터 기반으로 필요한 시술만 추천' },
+                    { icon: '✨', title: '高級設施', desc: '愛馬仕洗手液、Acqua di Parma護手霜等高級備品', descKr: '에르메스 핸드워시 및 아쿠아 디 파르마 핸드로션 등' },
+                    { icon: '🏆', title: '官方認證', desc: '2025年江南區醫療觀光協力機關認證', descKr: '2025년 강남구 의료관광 협력기관 위촉' }
+                ],
+                doctorTitle: '代表院長',
+                doctorTitleKr: '대표원장',
+                doctorName: '李俊',
+                doctorNameKr: '이준',
+                doctorCredentials: [
+                    { zh: '首爾大學醫學院畢業', kr: '서울대학교 의과대학 졸업' },
+                    { zh: '首爾大學生物工程博士課程修了', kr: '서울대학교 바이오엔지니어링 박사 과정 수료' },
+                    { zh: '首爾大學醫院住院醫師', kr: '서울대학교병원 수련의' },
+                    { zh: '江北三星醫院皮膚科專科醫師', kr: '강북삼성병원 피부과 전문의' },
+                    { zh: '前) First皮膚科醫院代表院長', kr: '전) 퍼스트피부과의원 대표원장' }
+                ],
+                treatmentTitle: '主打療程',
+                treatmentSubtitle: '온디맨드 시술',
+                stemCell: { title: '幹細胞治療', titleKr: '줄기세포 치료', desc: '韓國首家獲得「先進再生醫療機構」認證的皮膚科診所，現在在韓國也能享受幹細胞治療。', features: ['INNACEL細胞中心', '國際論文認證技術', '專業醫療團隊操作'] },
+                ulthera: { title: 'Ulthera超聲刀', titleKr: '온디맨드 울쎄라', desc: '根據每位患者的皮膚狀況，研究最適合的Ulthera組合方案。', features: ['DeepSEE技術 · 可視化提拉', 'FDA認證 · 安全有效', 'Ultherapy Prime · 最新設備'] },
+                galleryTitle: '診所環境',
+                gallerySubtitle: '병원 환경',
+                researchTitle: '研究認證',
+                researchSubtitle: '연구 및 인증',
+                paperTitle: '國際論文認證',
+                mediaTitle: '媒體報導',
+                locationTitle: '診所位置',
+                locationSubtitle: '오시는 길',
+                addressTitle: '📍 地址',
+                addressTitleKr: '주소',
+                address: '首爾特別市江南區島山大路 423',
+                addressKr: '서울특별시 강남구 도산대로 423',
+                transportTitle: '🚇 交通方式',
+                transport: '地鐵盆唐線 狎鷗亭羅德奧站 步行5分鐘',
+                transportKr: '분당선 압구정로데오역 도보 5분',
+                hoursTitle: '🕐 營業時間',
+                hours: ['週一至週五 10:00 - 19:00', '週六 10:00 - 16:00'],
+                hoursNote: '週日及節假日休息',
+                ctaTitle: '立即預約免費諮詢',
+                ctaSubtitle: '全程中文服務，讓您安心變美',
+                scanQR: '掃描QR碼聯繫我們',
+                orContact: '或透過以下方式聯繫',
+                email: '電子郵件',
+                instagram: 'Instagram',
+                wechat: '微信諮詢',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '您的姓名',
+                formContact: '聯繫方式 (WeChat/Line/WhatsApp)',
+                formInterest: '感興趣的療程',
+                formSubmit: '提交諮詢',
+                formSuccess: '提交成功！我們會盡快與您聯繫',
+                treatments: ['幹細胞療程', 'Ulthera超聲刀', '高壓氧艙', '客製化皮膚管理']
+            },
+            cn: {
+                backHome: '返回首页',
+                badge: '⭐ 明星艺人指定诊所',
+                tagline: '연예인 지정 클리닉',
+                subtitle: 'Dermatology On Demand',
+                koreanName: '디오디피부과의원 청담',
+                heroDesc: '韩国首家获得「先进再生医疗机构」认证的皮肤科诊所',
+                heroDescKr: '피부과 최초 첨단재생의료 실시기관 선정',
+                tags: ['干细胞疗程', '高压氧舱', 'Ulthera超声刀', '定制化疗程'],
+                year: '2025年',
+                yearDesc: '江南区医疗观光协力机关',
+                whyTitle: '为什么选择 DOD？',
+                whySubtitle: 'DOD만의 특별한 이유',
+                features: [
+                    { icon: '🧬', title: '干细胞治疗', desc: '资深专业医疗团队的干细胞复合治疗', descKr: '숙련된 전문 의료진의 줄기세포 복합치료' },
+                    { icon: '👨‍⚕️', title: '资深医疗团队', desc: '丰富皮肤治疗经验，提拉、皮肤补水、填充等', descKr: '다양한 피부 시술 경험으로 리프팅, 스킨부스터, 필러 등' },
+                    { icon: '🔬', title: '定制化皮肤检测', desc: '使用Morpheus 3D、Mark-Vu等最新设备', descKr: '모르페우스 3D, 마크뷰 등 최신 기기를 활용' },
+                    { icon: '🚪', title: '私密诊疗室', desc: '基于皮肤检测数据，医疗团队咨询后只推荐必要疗程', descKr: '피부 검사 데이터 기반으로 필요한 시술만 추천' },
+                    { icon: '✨', title: '高级设施', desc: '爱马仕洗手液、Acqua di Parma护手霜等高级备品', descKr: '에르메스 핸드워시 및 아쿠아 디 파르마 핸드로션 등' },
+                    { icon: '🏆', title: '官方认证', desc: '2025年江南区医疗观光协力机关认证', descKr: '2025년 강남구 의료관광 협력기관 위촉' }
+                ],
+                doctorTitle: '代表院长',
+                doctorTitleKr: '대표원장',
+                doctorName: '李俊',
+                doctorNameKr: '이준',
+                doctorCredentials: [
+                    { zh: '首尔大学医学院毕业', kr: '서울대학교 의과대학 졸업' },
+                    { zh: '首尔大学生物工程博士课程修了', kr: '서울대학교 바이오엔지니어링 박사 과정 수료' },
+                    { zh: '首尔大学医院住院医师', kr: '서울대학교병원 수련의' },
+                    { zh: '江北三星医院皮肤科专科医师', kr: '강북삼성병원 피부과 전문의' },
+                    { zh: '前) First皮肤科医院代表院长', kr: '전) 퍼스트피부과의원 대표원장' }
+                ],
+                treatmentTitle: '主打疗程',
+                treatmentSubtitle: '온디맨드 시술',
+                stemCell: { title: '干细胞治疗', titleKr: '줄기세포 치료', desc: '韩国首家获得「先进再生医疗机构」认证的皮肤科诊所，现在在韩国也能享受干细胞治疗。', features: ['INNACEL细胞中心', '国际论文认证技术', '专业医疗团队操作'] },
+                ulthera: { title: 'Ulthera超声刀', titleKr: '온디맨드 울쎄라', desc: '根据每位患者的皮肤状况，研究最适合的Ulthera组合方案。', features: ['DeepSEE技术 · 可视化提拉', 'FDA认证 · 安全有效', 'Ultherapy Prime · 最新设备'] },
+                galleryTitle: '诊所环境',
+                gallerySubtitle: '병원 환경',
+                researchTitle: '研究认证',
+                researchSubtitle: '연구 및 인증',
+                paperTitle: '国际论文认证',
+                mediaTitle: '媒体报道',
+                locationTitle: '诊所位置',
+                locationSubtitle: '오시는 길',
+                addressTitle: '📍 地址',
+                addressTitleKr: '주소',
+                address: '首尔特别市江南区岛山大路 423',
+                addressKr: '서울특별시 강남구 도산대로 423',
+                transportTitle: '🚇 交通方式',
+                transport: '地铁盆唐线 狎�的亭罗德奥站 步行5分钟',
+                transportKr: '분당선 압구정로데오역 도보 5분',
+                hoursTitle: '🕐 营业时间',
+                hours: ['周一至周五 10:00 - 19:00', '周六 10:00 - 16:00'],
+                hoursNote: '周日及节假日休息',
+                ctaTitle: '立即预约免费咨询',
+                ctaSubtitle: '全程中文服务，让您安心变美',
+                scanQR: '扫描QR码联系我们',
+                orContact: '或透过以下方式联系',
+                email: '电子邮件',
+                instagram: 'Instagram',
+                wechat: '微信咨询',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '您的姓名',
+                formContact: '联系方式 (WeChat/Line/WhatsApp)',
+                formInterest: '感兴趣的疗程',
+                formSubmit: '提交咨询',
+                formSuccess: '提交成功！我们会尽快与您联系',
+                treatments: ['干细胞疗程', 'Ulthera超声刀', '高压氧舱', '定制化皮肤管理']
+            },
+            ko: {
+                backHome: '홈으로 돌아가기',
+                badge: '⭐ 연예인 지정 클리닉',
+                tagline: '明星藝人指定診所',
+                subtitle: 'Dermatology On Demand',
+                koreanName: '디오디피부과의원 청담',
+                heroDesc: '피부과 최초 첨단재생의료 실시기관 선정',
+                heroDescKr: '韓國首家獲得「先進再生醫療機構」認證的皮膚科診所',
+                tags: ['줄기세포 시술', '고압산소챔버', '울쎄라', '맞춤 시술'],
+                year: '2025년',
+                yearDesc: '강남구 의료관광 협력기관',
+                whyTitle: 'DOD만의 특별한 이유',
+                whySubtitle: '為什麼選擇 DOD？',
+                features: [
+                    { icon: '🧬', title: '줄기세포 치료', desc: '숙련된 전문 의료진의 줄기세포 복합치료', descKr: '資深專業醫療團隊的幹細胞複合治療' },
+                    { icon: '👨‍⚕️', title: '전문 의료진', desc: '다양한 피부 시술 경험으로 리프팅, 스킨부스터, 필러 등', descKr: '豐富皮膚治療經驗，提拉、皮膚補水、填充等' },
+                    { icon: '🔬', title: '맞춤 피부 검사', desc: '모르페우스 3D, 마크뷰 등 최신 기기를 활용', descKr: '使用Morpheus 3D、Mark-Vu等最新設備' },
+                    { icon: '🚪', title: '프라이빗 진료실', desc: '피부 검사 데이터 기반으로 필요한 시술만 추천', descKr: '基於皮膚檢測數據，醫療團隊諮詢後只推薦必要療程' },
+                    { icon: '✨', title: '고급 시설', desc: '에르메스 핸드워시 및 아쿠아 디 파르마 핸드로션 등', descKr: '愛馬仕洗手液、Acqua di Parma護手霜等高級備品' },
+                    { icon: '🏆', title: '공식 인증', desc: '2025년 강남구 의료관광 협력기관 위촉', descKr: '2025年江南區醫療觀光協力機關認證' }
+                ],
+                doctorTitle: '대표원장',
+                doctorTitleKr: '代表院長',
+                doctorName: '이준',
+                doctorNameKr: '李俊',
+                doctorCredentials: [
+                    { zh: '서울대학교 의과대학 졸업', kr: '首爾大學醫學院畢業' },
+                    { zh: '서울대학교 바이오엔지니어링 박사 과정 수료', kr: '首爾大學生物工程博士課程修了' },
+                    { zh: '서울대학교병원 수련의', kr: '首爾大學醫院住院醫師' },
+                    { zh: '강북삼성병원 피부과 전문의', kr: '江北三星醫院皮膚科專科醫師' },
+                    { zh: '전) 퍼스트피부과의원 대표원장', kr: '前) First皮膚科醫院代表院長' }
+                ],
+                treatmentTitle: '온디맨드 시술',
+                treatmentSubtitle: '主打療程',
+                stemCell: { title: '줄기세포 치료', titleKr: '幹細胞治療', desc: '피부과 최초 첨단재생의료 실시기관 선정, 한국에서도 줄기세포 치료를 받을 수 있습니다.', features: ['INNACEL 세포센터', '국제 논문 인증 기술', '전문 의료진 시술'] },
+                ulthera: { title: '온디맨드 울쎄라', titleKr: 'Ulthera超聲刀', desc: '환자별 피부 상태에 맞춰 최적의 울쎄라 조합을 연구합니다.', features: ['DeepSEE 기술 · 시각화 리프팅', 'FDA 인증 · 안전하고 효과적', 'Ultherapy Prime · 최신 장비'] },
+                galleryTitle: '병원 환경',
+                gallerySubtitle: '診所環境',
+                researchTitle: '연구 및 인증',
+                researchSubtitle: '研究認證',
+                paperTitle: '국제 논문 인증',
+                mediaTitle: '미디어 보도',
+                locationTitle: '오시는 길',
+                locationSubtitle: '診所位置',
+                addressTitle: '📍 주소',
+                addressTitleKr: '地址',
+                address: '서울특별시 강남구 도산대로 423',
+                addressKr: '首爾特別市江南區島山大路 423',
+                transportTitle: '🚇 교통편',
+                transport: '분당선 압구정로데오역 도보 5분',
+                transportKr: '地鐵盆唐線 狎鷗亭羅德奧站 步行5分鐘',
+                hoursTitle: '🕐 영업시간',
+                hours: ['월-금 10:00 - 19:00', '토 10:00 - 16:00'],
+                hoursNote: '일요일 및 공휴일 휴무',
+                ctaTitle: '무료 상담 예약하기',
+                ctaSubtitle: '전 과정 중국어 서비스로 안심하세요',
+                scanQR: 'QR코드를 스캔하여 연락하세요',
+                orContact: '또는 아래 방법으로 연락하세요',
+                email: '이메일',
+                instagram: 'Instagram',
+                wechat: 'WeChat',
+                whatsapp: 'WhatsApp',
+                line: 'Line',
+                kakao: 'KakaoTalk',
+                formName: '이름',
+                formContact: '연락처 (WeChat/Line/WhatsApp)',
+                formInterest: '관심 시술',
+                formSubmit: '상담 신청',
+                formSuccess: '신청 완료! 빠른 시일 내에 연락드리겠습니다',
+                treatments: ['줄기세포 치료', '울쎄라', '고압산소챔버', '맞춤형 피부관리']
+            }
+        };
+
+        let currentLang = 'zh';
+
+        // URL 파라미터에서 언어 가져오기
+        function getLangFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('lang') || 'zh';
+        }
+
+        // 언어 변경 함수
+        function setLang(lang) {
+            currentLang = lang;
+            localStorage.setItem('gangnamBeautyLang', lang);
+            updateContent();
+            updateLangButtons();
+        }
+
+        // 버튼 상태 업데이트
+        function updateLangButtons() {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === currentLang) {
+                    btn.classList.add('bg-gold', 'text-white');
+                    btn.classList.remove('text-stone-500', 'hover:text-stone-700');
+                } else {
+                    btn.classList.remove('bg-gold', 'text-white');
+                    btn.classList.add('text-stone-500', 'hover:text-stone-700');
+                }
+            });
+        }
+
+        // 콘텐츠 업데이트
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            // 네비게이션
+            document.getElementById('backHomeText').textContent = t.backHome;
+            document.getElementById('backHomeLink').href = `index.html?lang=${currentLang}`;
+            
+            // 히어로 섹션
+            document.getElementById('heroBadge').innerHTML = `${t.badge} · ${t.tagline}`;
+            document.getElementById('heroSubtitle').textContent = t.subtitle;
+            document.getElementById('heroKoreanName').textContent = t.koreanName;
+            document.getElementById('heroDesc').innerHTML = `${t.heroDesc}<br>${t.heroDescKr}`;
+            
+            const tagsHtml = t.tags.map(tag => `<span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">${tag}</span>`).join('');
+            document.getElementById('heroTags').innerHTML = tagsHtml;
+            
+            document.getElementById('yearText').textContent = t.year;
+            document.getElementById('yearDesc').textContent = t.yearDesc;
+            
+            // 왜 DOD 섹션
+            document.getElementById('whyTitle').textContent = t.whyTitle;
+            document.getElementById('whySubtitle').textContent = t.whySubtitle;
+            
+            const featuresHtml = t.features.map(f => `
+                <div class="text-center p-8 rounded-2xl bg-stone-50 hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-dod-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">${f.icon}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-3">${f.title}</h3>
+                    <p class="text-stone-600">${f.desc}</p>
+                    <p class="text-sm text-stone-500 mt-2">${f.descKr}</p>
+                </div>
+            `).join('');
+            document.getElementById('featuresGrid').innerHTML = featuresHtml;
+            
+            // 의사 섹션
+            document.getElementById('doctorTitle').innerHTML = `${t.doctorTitle} <span class="text-stone-500">${t.doctorTitleKr}</span>`;
+            document.getElementById('doctorName').innerHTML = `${t.doctorName} <span class="text-stone-500">${t.doctorNameKr}</span>`;
+            
+            const credentialsHtml = t.doctorCredentials.map(c => `
+                <p class="flex items-center gap-3">
+                    <span class="w-2 h-2 bg-dod-primary rounded-full"></span>
+                    ${c.zh} · ${c.kr}
+                </p>
+            `).join('');
+            document.getElementById('doctorCredentials').innerHTML = credentialsHtml;
+            
+            // 시술 섹션
+            document.getElementById('treatmentTitle').textContent = t.treatmentTitle;
+            document.getElementById('treatmentSubtitle').textContent = t.treatmentSubtitle;
+            document.getElementById('stemCellTitle').innerHTML = `${t.stemCell.title} · ${t.stemCell.titleKr}`;
+            document.getElementById('stemCellDesc').textContent = t.stemCell.desc;
+            document.getElementById('stemCellFeatures').innerHTML = t.stemCell.features.map(f => `<li>✓ ${f}</li>`).join('');
+            document.getElementById('ultheraTitle').innerHTML = `${t.ulthera.title} · ${t.ulthera.titleKr}`;
+            document.getElementById('ultheraDesc').textContent = t.ulthera.desc;
+            document.getElementById('ultheraFeatures').innerHTML = t.ulthera.features.map(f => `<li>✓ ${f}</li>`).join('');
+            
+            // 갤러리
+            document.getElementById('galleryTitle').textContent = t.galleryTitle;
+            document.getElementById('gallerySubtitle').textContent = t.gallerySubtitle;
+            
+            // 연구
+            document.getElementById('researchTitle').textContent = t.researchTitle;
+            document.getElementById('researchSubtitle').textContent = t.researchSubtitle;
+            document.getElementById('paperTitle').textContent = t.paperTitle;
+            document.getElementById('mediaTitle').textContent = t.mediaTitle;
+            
+            // 위치
+            document.getElementById('locationTitle').textContent = t.locationTitle;
+            document.getElementById('locationSubtitle').textContent = t.locationSubtitle;
+            document.getElementById('addressTitle').innerHTML = `${t.addressTitle} <span class="text-stone-500">${t.addressTitleKr}</span>`;
+            document.getElementById('addressText').textContent = t.address;
+            document.getElementById('addressTextKr').textContent = t.addressKr;
+            document.getElementById('transportTitle').textContent = t.transportTitle;
+            document.getElementById('transportText').textContent = t.transport;
+            document.getElementById('transportTextKr').textContent = t.transportKr;
+            document.getElementById('hoursTitle').textContent = t.hoursTitle;
+            document.getElementById('hoursText').innerHTML = t.hours.map(h => `<p class="text-stone-600">${h}</p>`).join('');
+            document.getElementById('hoursNote').textContent = t.hoursNote;
+            
+            // Contact 섹션
+            document.getElementById('ctaTitle').textContent = t.ctaTitle;
+            document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+            document.getElementById('scanQRText').textContent = t.scanQR;
+            document.getElementById('wechatLabel').textContent = t.wechat;
+            document.getElementById('whatsappLabel').textContent = t.whatsapp;
+            document.getElementById('kakaoLabel').textContent = t.kakao;
+            document.getElementById('lineLabel').textContent = t.line;
+            document.getElementById('orContactText').textContent = t.orContact;
+            document.getElementById('emailLabel').textContent = t.email;
+            document.getElementById('instagramLabel').textContent = t.instagram;
+            document.getElementById('formNameInput').placeholder = t.formName;
+            document.getElementById('formContactInput').placeholder = t.formContact;
+            document.getElementById('formInterestSelect').innerHTML = `<option value="">${t.formInterest}</option>` + 
+                t.treatments.map(tr => `<option value="${tr}">${tr}</option>`).join('');
+            document.getElementById('formSubmitBtn').textContent = t.formSubmit;
+            document.getElementById('formSuccessText').textContent = t.formSuccess;
+        }
+
+        // 폼 제출 처리
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            const data = {
+                name: formData.get('name'),
+                contact: formData.get('contact'),
+                interest: formData.get('interest'),
+                lang: currentLang,
+                source: 'clinic-dod'
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycbwIQl8BukeRQ81R_dJPQ2aQP_gzrVl1U--vZEC4nHvERbExv0ezJYr36YY9J1dcTNAD/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).then(() => {
+                document.getElementById('contactForm').classList.add('hidden');
+                document.getElementById('formSuccess').classList.remove('hidden');
+            }).catch(err => {
+                console.error('Error:', err);
+                alert('提交失敗，請稍後再試');
+            });
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL 또는 localStorage에서 언어 가져오기
+            currentLang = getLangFromUrl() || localStorage.getItem('gangnamBeautyLang') || 'zh';
+            updateContent();
+            updateLangButtons();
+            
+            // 폼 이벤트 리스너 추가
+            document.getElementById('contactForm').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a id="backHomeLink" href="index.html" class="flex items-center gap-2 text-stone-600 hover:text-dod-primary transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <span id="backHomeText">返回首頁</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="images/dod/DOD_LOGO.jpg" alt="DOD Logo" class="w-10 h-10 rounded">
+                    <span class="font-medium text-stone-800 hidden sm:block">DOD Dermatology</span>
+                </div>
+                <!-- 언어 전환 버튼 -->
+                <div class="flex bg-stone-100 rounded-full p-1">
+                    <button onclick="setLang('zh')" data-lang="zh" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all bg-gold text-white">繁</button>
+                    <button onclick="setLang('cn')" data-lang="cn" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all text-stone-500 hover:text-stone-700">简</button>
+                    <button onclick="setLang('ko')" data-lang="ko" class="lang-btn px-3 py-1 rounded-full text-sm font-medium transition-all text-stone-500 hover:text-stone-700">한</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-dod pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <span id="heroBadge" class="inline-block px-4 py-2 bg-gold text-white rounded-full text-sm font-medium mb-6">
+                        ⭐ 明星藝人指定診所 · 연예인 지정 클리닉
+                    </span>
+                    <h1 class="text-5xl md:text-7xl font-light text-white mb-4 tracking-wider">DOD</h1>
+                    <p id="heroSubtitle" class="text-2xl text-white/80 mb-2">Dermatology On Demand</p>
+                    <p id="heroKoreanName" class="text-lg text-gold mb-6">디오디피부과의원 청담</p>
+                    <p id="heroDesc" class="text-white/90 text-lg leading-relaxed mb-8">
+                        韓國首家獲得「先進再生醫療機構」認證的皮膚科診所<br>
+                        피부과 최초 첨단재생의료 실시기관 선정
+                    </p>
+                    <div id="heroTags" class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">幹細胞療程</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">高壓氧艙</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">Ulthera超聲刀</span>
+                        <span class="px-4 py-2 bg-white/20 text-white rounded-full text-sm">客製化療程</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="images/dod/dod_1.jpg" alt="DOD 幹細胞治療" class="rounded-2xl shadow-2xl w-full">
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4">
+                        <p id="yearText" class="text-dod-primary font-bold">2025年</p>
+                        <p id="yearDesc" class="text-sm text-stone-600">江南區醫療觀光協力機關</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why DOD Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="whyTitle" class="text-3xl font-bold text-stone-800 mb-4">為什麼選擇 DOD？</h2>
+                <p id="whySubtitle" class="text-stone-600">DOD만의 특별한 이유</p>
+            </div>
+            <div id="featuresGrid" class="grid md:grid-cols-3 gap-8">
+                <!-- JS로 생성 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctor Section -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="images/dod/dod_원장.jpg" alt="李俊院長" class="rounded-2xl shadow-xl w-full max-w-md mx-auto">
+                </div>
+                <div>
+                    <span id="doctorTitle" class="text-dod-primary font-medium">代表院長 <span class="text-stone-500">대표원장</span></span>
+                    <h2 id="doctorName" class="text-4xl font-bold text-stone-800 mt-2 mb-4">李俊 <span class="text-stone-500">이준</span></h2>
+                    <p class="text-xl text-stone-600 mb-6">Dr. Joon Lee, M.D</p>
+                    <div id="doctorCredentials" class="space-y-3 text-stone-700">
+                        <!-- JS로 생성 -->
+                    </div>
+                    <div class="mt-8 flex gap-4">
+                        <img src="https://upload.wikimedia.org/wikipedia/ko/thumb/4/4a/Seoul_national_university_emblem.svg/1200px-Seoul_national_university_emblem.svg.png" alt="Seoul National University" class="h-16 object-contain">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Samsung_Medical_Center_logo.svg/2560px-Samsung_Medical_Center_logo.svg.png" alt="Samsung Medical Center" class="h-12 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatments Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="treatmentTitle" class="text-3xl font-bold text-stone-800 mb-4">主打療程</h2>
+                <p id="treatmentSubtitle" class="text-stone-600">온디맨드 시술</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Stem Cell -->
+                <div class="bg-gradient-to-br from-dod-primary to-dod-light rounded-2xl overflow-hidden shadow-xl">
+                    <img src="images/dod/dod_5_줄기세포_이나셀센터.jpg" alt="幹細胞治療中心" class="w-full h-64 object-cover">
+                    <div class="p-8 text-white">
+                        <h3 id="stemCellTitle" class="text-2xl font-bold mb-3">幹細胞治療 · 줄기세포 치료</h3>
+                        <p id="stemCellDesc" class="text-white/90 mb-4">韓國首家獲得「先進再生醫療機構」認證的皮膚科診所，現在在韓國也能享受幹細胞治療。</p>
+                        <ul id="stemCellFeatures" class="space-y-2 text-white/80">
+                            <li>✓ INNACEL細胞中心</li>
+                            <li>✓ 國際論文認證技術</li>
+                            <li>✓ 專業醫療團隊操作</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Ulthera -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-stone-200">
+                    <img src="images/dod/올세라_시술_기계.jpg" alt="Ulthera超聲刀" class="w-full h-64 object-cover">
+                    <div class="p-8">
+                        <h3 id="ultheraTitle" class="text-2xl font-bold text-stone-800 mb-3">Ulthera超聲刀 · 온디맨드 울쎄라</h3>
+                        <p id="ultheraDesc" class="text-stone-600 mb-4">根據每位患者的皮膚狀況，研究最適合的Ulthera組合方案。</p>
+                        <ul id="ultheraFeatures" class="space-y-2 text-stone-600">
+                            <li>✓ DeepSEE技術 · 可視化提拉</li>
+                            <li>✓ FDA認證 · 安全有效</li>
+                            <li>✓ Ultherapy Prime · 最新設備</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- More treatments -->
+            <div class="mt-8">
+                <img src="images/dod/온디맨드_페이스_바디.jpg" alt="On Demand Face/Body" class="rounded-2xl shadow-lg w-full">
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinic Gallery -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="galleryTitle" class="text-3xl font-bold text-stone-800 mb-4">診所環境</h2>
+                <p id="gallerySubtitle" class="text-stone-600">병원 환경</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <img src="images/dod/dod_3.jpg" alt="DOD 候診區" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-64 object-cover">
+                <img src="images/dod/dod_4.jpg" alt="DOD 櫃檯" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-64 object-cover">
+                <img src="images/dod/DOD_더블디_멘버십.jpg" alt="DOD 會員服務" class="rounded-xl shadow-lg img-hover cursor-pointer w-full h-64 object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- Research & Certification -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="researchTitle" class="text-3xl font-bold text-stone-800 mb-4">研究認證</h2>
+                <p id="researchSubtitle" class="text-stone-600">연구 및 인증</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-stone-50 rounded-2xl p-8">
+                    <h3 id="paperTitle" class="text-xl font-bold text-stone-800 mb-4">國際論文認證</h3>
+                    <img src="images/dod/줄기세포_연구_증명.jpg" alt="研究論文" class="rounded-xl w-full">
+                </div>
+                <div class="bg-stone-50 rounded-2xl p-8">
+                    <h3 id="mediaTitle" class="text-xl font-bold text-stone-800 mb-4">媒體報導</h3>
+                    <img src="images/dod/DOD보도.jpg" alt="媒體報導" class="rounded-xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section class="py-20 bg-stone-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 id="locationTitle" class="text-3xl font-bold text-stone-800 mb-4">診所位置</h2>
+                <p id="locationSubtitle" class="text-stone-600">오시는 길</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="images/dod/dod_지도.jpg" alt="DOD 地圖" class="rounded-2xl shadow-xl w-full">
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h3 id="addressTitle" class="text-xl font-bold text-stone-800 mb-2">📍 地址 <span class="text-stone-500">주소</span></h3>
+                        <p id="addressText" class="text-stone-600">首爾特別市江南區島山大路 423</p>
+                        <p id="addressTextKr" class="text-stone-500">서울특별시 강남구 도산대로 423</p>
+                    </div>
+                    <div>
+                        <h3 id="transportTitle" class="text-xl font-bold text-stone-800 mb-2">🚇 交通方式</h3>
+                        <p id="transportText" class="text-stone-600">地鐵盆唐線 狎鷗亭羅德奧站 步行5分鐘</p>
+                        <p id="transportTextKr" class="text-stone-500">분당선 압구정로데오역 도보 5분</p>
+                    </div>
+                    <div>
+                        <h3 id="hoursTitle" class="text-xl font-bold text-stone-800 mb-2">🕐 營業時間</h3>
+                        <div id="hoursText">
+                            <p class="text-stone-600">週一至週五 10:00 - 19:00</p>
+                            <p class="text-stone-600">週六 10:00 - 16:00</p>
+                        </div>
+                        <p id="hoursNote" class="text-stone-500">週日及節假日休息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 id="ctaTitle" class="text-3xl font-bold mb-4">立即預約免費諮詢</h2>
+                <p id="ctaSubtitle" class="text-stone-400">全程中文服務，讓您安心變美</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Left - QR Codes -->
+                <div class="lg:col-span-2">
+                    <p id="scanQRText" class="text-center text-stone-400 mb-6">掃描QR碼聯繫我們</p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <!-- WeChat -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/wechat_qrcode.png" alt="WeChat QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span id="wechatLabel" class="text-stone-800 font-medium text-sm">微信諮詢</span>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/whatsapp_qrcode.jpg" alt="WhatsApp QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-600 rounded-full"></span>
+                                <span id="whatsappLabel" class="text-stone-800 font-medium text-sm">WhatsApp</span>
+                            </div>
+                        </div>
+
+                        <!-- KakaoTalk -->
+                        <div class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/kakao_qrcode.png" alt="KakaoTalk QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                <span id="kakaoLabel" class="text-stone-800 font-medium text-sm">KakaoTalk</span>
+                            </div>
+                        </div>
+
+                        <!-- Line -->
+                        <a href="https://line.me/R/ti/p/@559aibvg" target="_blank" class="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-shadow block">
+                            <div class="w-full aspect-square bg-stone-100 rounded-xl mb-3 overflow-hidden">
+                                <img src="images/sns/line_qrcode.jpg" alt="Line QR" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                <span id="lineLabel" class="text-stone-800 font-medium text-sm">Line</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right - Contact Info & Form -->
+                <div class="space-y-6">
+                    <!-- Direct Contact -->
+                    <div class="bg-white/10 rounded-2xl p-6 space-y-4">
+                        <p id="orContactText" class="text-stone-400 text-sm">或透過以下方式聯繫</p>
+
+                        <!-- Email -->
+                        <a href="mailto:gangnambeautykr@gmail.com" class="flex items-center gap-4 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="emailLabel" class="text-sm text-stone-400">電子郵件</p>
+                                <p class="font-medium">gangnambeautykr@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/gangnambeauty.kr" target="_blank" class="flex items-center gap-4 p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-colors">
+                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="instagramLabel" class="text-sm text-stone-400">Instagram</p>
+                                <p class="font-medium">@gangnambeauty.kr</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Quick Form -->
+                    <div class="bg-white rounded-2xl p-6 text-stone-800">
+                        <form id="contactForm" class="space-y-4">
+                            <input type="text" name="name" id="formNameInput" placeholder="您的姓名" required
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-dod-primary focus:ring-2 focus:ring-dod-primary/20 outline-none text-sm">
+                            <input type="text" name="contact" id="formContactInput" placeholder="聯繫方式 (WeChat/Line/WhatsApp)" required
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-dod-primary focus:ring-2 focus:ring-dod-primary/20 outline-none text-sm">
+                            <select name="interest" id="formInterestSelect"
+                                class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-dod-primary focus:ring-2 focus:ring-dod-primary/20 outline-none text-sm">
+                                <option value="">感興趣的療程</option>
+                            </select>
+                            <button type="submit" id="formSubmitBtn"
+                                class="w-full py-3 bg-dod-primary text-white rounded-xl font-medium hover:bg-dod-dark transition-colors">
+                                提交諮詢
+                            </button>
+                        </form>
+                        <div id="formSuccess" class="hidden text-center py-6">
+                            <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p id="formSuccessText" class="text-lg font-medium text-stone-800">提交成功！我們會盡快與您聯繫</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="images/dod/DOD_LOGO.jpg" alt="DOD Logo" class="w-16 h-16 rounded mx-auto mb-4">
+            <p class="text-stone-400 mb-4">DOD Dermatology On Demand · 디오디피부과의원 청담</p>
+            <p class="text-stone-500 text-sm">© 2025 Gangnam Beauty Agency. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Button -->
+    <a href="https://line.me/R/ti/p/@559aibvg" target="_blank" class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors z-40">
+        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+</body>
+</html>
